@@ -54,7 +54,7 @@ docker run log-output-app
 ## Deploy to kubernetes
 
 ```bash
-kubectl create deployment hashgenerator-dep --image=wilky2/logoutput
+kubectl apply -f manifests/deployment.yaml
 ```
 
 
