@@ -54,7 +54,7 @@ docker run todoappwebserver
 ## Deploy to kubernetes
 
 ```bash
-kubectl create deployment hashgenerator-dep --image=wilky2/todoappwebserver
+kubectl apply -f manifests/deployment.yaml
 ```
 
 

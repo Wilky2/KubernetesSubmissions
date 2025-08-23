@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoappwebserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todoappwebserver
+  template:
+    metadata:
+      labels:
+        app: todoappwebserver
+    spec:
+      containers:
+        - name: todoappwebserver
+          image: wilky2/todoappwebserver
