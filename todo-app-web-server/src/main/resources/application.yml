@@ -1,0 +1,3 @@
+spring.application.name: todo-app-web-server
+
+server.port: ${PORT:8080}
