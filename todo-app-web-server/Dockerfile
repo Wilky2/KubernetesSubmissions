@@ -7,6 +7,4 @@ FROM eclipse-temurin:17.0.5_8-jre-focal
 WORKDIR /app
 COPY --from=builder /app/target/todo-app-web-server-0.0.1-SNAPSHOT.jar /app/
 
-EXPOSE 8080
-
 ENTRYPOINT ["java", "-jar", "todo-app-web-server-0.0.1-SNAPSHOT.jar"]

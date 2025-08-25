@@ -15,3 +15,6 @@ spec:
       containers:
         - name: todoappwebserver
           image: wilky2/todoappwebserver
+          env:
+            - name: PORT
+              value: "3000"
