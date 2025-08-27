@@ -57,6 +57,8 @@ docker run log-output-app
 kubectl apply -f manifests/deployment.yaml
 ```
 
+## Endpoint
 
+/status : Endpoint to request the current status (timestamp and the random string)
 
 
