@@ -1,6 +1,6 @@
-# Log Output App
+# Ping Pong App
 
-A Spring Boot application that generates a random string on startup, stores this string into memory, and outputs it every 5 seconds with a timestamp.
+Application that simply responds with &quot;pong 0&quot; to a GET request
 
 ---
 
@@ -30,7 +30,7 @@ This will generate the JAR file in the `target/` directory.
 Navigate to the `target/` folder and run:
 
 ```bash
-java -jar log-output-app-0.0.1-SNAPSHOT.jar
+java -jar ping-pong-app-0.0.1-SNAPSHOT.jar
 ```
 
 ---
@@ -40,13 +40,13 @@ java -jar log-output-app-0.0.1-SNAPSHOT.jar
 1. **Build the Docker image:**
 
 ```bash
-docker build -t log-output-app .
+docker build -t ping-pong-app .
 ```
 
 2. **Run the container:**
 
 ```bash
-docker run log-output-app
+docker run ping-pong-app
 ```
 
 ---
@@ -59,6 +59,5 @@ kubectl apply -f manifests
 
 ## Endpoint
 
-/status : Endpoint to request the current status (timestamp and the random string)
-
+/pingpong : Endpoint to request for the "pong 0" response
 

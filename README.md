@@ -12,3 +12,4 @@
 - [1.6.](https://github.com/Wilky2/KubernetesSubmissions/tree/1.6/todo-app-web-server)
 - [1.7.](https://github.com/Wilky2/KubernetesSubmissions/tree/1.7/log-output-app)
 - [1.8.](https://github.com/Wilky2/KubernetesSubmissions/tree/1.8/todo-app-web-server)
+- [1.9.](https://github.com/Wilky2/KubernetesSubmissions/tree/1.9/ping-pong-app)
