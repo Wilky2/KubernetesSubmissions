@@ -1,6 +1,6 @@
 # Log Output App
 
-A Spring Boot application that generates a random string on startup, stores this string into memory, and outputs it every 5 seconds with a timestamp.
+A Spring Boot application that reads a specified file and provides the content in the HTTP GET endpoint for the user to see.
 
 ---
 
@@ -61,4 +61,7 @@ kubectl apply -f manifests
 
 /status : Endpoint to request the current status (timestamp and the random string)
 
+## Environment variable
+FILEPATH :  The file directory
 
+PORT: Server port

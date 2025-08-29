@@ -4,22 +4,22 @@ public class CurrentStatus {
 
 	private String randomString;
 
-	private String currentTimestamp;
+	private String timestamp;
 
 	public String getRandomString() {
-		return randomString;
+		return this.randomString;
 	}
 
 	public void setRandomString(String randomString) {
 		this.randomString = randomString;
 	}
 
-	public String getCurrentTimestamp() {
-		return currentTimestamp;
+	public String getTimestamp() {
+		return this.timestamp;
 	}
 
-	public void setCurrentTimestamp(String currentTimestamp) {
-		this.currentTimestamp = currentTimestamp;
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logoutput-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logoutput
+  template:
+    metadata:
+      labels:
+        app: logoutput
+    spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
+      containers:
+        - name: logoutput
+          image: wilky2/logoutput
+          volumeMounts:
+            - name: shared-log
+              mountPath: /usr/src/app/files
+        - name: logoutputfile
+          image: wilky2/logoutputfile
+          volumeMounts:
+            - name: shared-log
+              mountPath: /usr/src/app/files 

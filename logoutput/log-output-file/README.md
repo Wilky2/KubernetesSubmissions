@@ -1,6 +1,6 @@
-# Todo App Web Server
+# Log Output file
 
-A web server for a todo app create with Spring Boot.
+Application that generates a random string on startup and writes a line with the random string and timestamp every 5 seconds into a file.
 
 ---
 
@@ -30,7 +30,7 @@ This will generate the JAR file in the `target/` directory.
 Navigate to the `target/` folder and run:
 
 ```bash
-java -jar todo-app-web-server-0.0.1-SNAPSHOT.jar
+java -jar log-output-file-0.0.1-SNAPSHOT.jar
 ```
 
 ---
@@ -40,26 +40,16 @@ java -jar todo-app-web-server-0.0.1-SNAPSHOT.jar
 1. **Build the Docker image:**
 
 ```bash
-docker build -t todoappwebserver .
+docker build -t log-output-file .
 ```
 
 2. **Run the container:**
 
 ```bash
-docker run todoappwebserver
+docker run log-output-file
 ```
 
 ---
 
-## Deploy to kubernetes
-
-```bash
-kubectl apply -f manifests/deployment.yaml
-```
-
 ## Environment variable
-PORT: Server port
-
-
-
-
+FILEPATH :  The file directory

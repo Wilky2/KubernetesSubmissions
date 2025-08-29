@@ -1,0 +1,7 @@
+spring.application.name: log-output-app
+
+server.port: ${PORT:8080}
+
+file:
+  path: ${FILEPATH:/usr/src/app/files}
+  name: 'app-log.json'

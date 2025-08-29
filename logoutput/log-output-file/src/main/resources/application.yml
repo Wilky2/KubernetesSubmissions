@@ -1,0 +1,5 @@
+spring.application.name: log-output-file
+
+file:
+  path: ${FILEPATH:/usr/src/app/files}
+  name: 'app-log.json'
