@@ -2,9 +2,8 @@ package com.wilky.logoutputapp;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,28 +19,61 @@ public class LogController {
 
 	private final String filePath;
 	private final String fileName;
+	private final String pingpong;
 	private final ObjectMapper objectMapper;
 	private static final Logger logger = LoggerFactory.getLogger(LogController.class);
 
-	public LogController(@Value("${file.path}") String filePath, @Value("${file.name}") String fileName) {
+	public LogController(@Value("${file.path}") String filePath, @Value("${file.name}") String fileName,
+			@Value("${file.pingpong}") String pingpong) {
 		this.filePath = filePath;
 		this.fileName = fileName;
+		this.pingpong = pingpong;
 		this.objectMapper = new ObjectMapper();
 	}
 
 	@GetMapping("status")
-	public List<CurrentStatus> getCurrentStatus() {
+	public String getCurrentStatus() {
+		CurrentStatus status = readJsonStatus();
+		long pingpongValue = readPingpongValue();
+		status.setPingpong(pingpongValue);
+		return formatStatus(status);
+	}
+
+	private CurrentStatus readJsonStatus() {
+		File file = Paths.get(filePath, fileName).toFile();
+		logger.info("Reading file :" + file.getAbsolutePath());
+
+		if (!file.exists()) {
+			return new CurrentStatus();
+		}
+
 		try {
-			logger.info("Reading file :" + this.filePath + "/" + this.fileName);
-			File file = Paths.get(filePath, fileName).toFile();
-			if (!file.exists()) {
-				return Collections.emptyList(); // return [] if file doesn’t exist
-			}
-			return objectMapper.readValue(file, new TypeReference<List<CurrentStatus>>() {
+			return objectMapper.readValue(file, new TypeReference<CurrentStatus>() {
 			});
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to read status file", e);
 		}
+	}
+
+	private long readPingpongValue() {
+		File pingpongFile = Paths.get(filePath, pingpong).toFile();
+
+		if (!pingpongFile.exists()) {
+			return 0;
+		}
+
+		try {
+			String value = new String(Files.readAllBytes(pingpongFile.toPath())).trim();
+			return Long.parseLong(value);
+		} catch (Exception e) {
+			logger.warn("Failed to read pingpong file, defaulting to 0", e);
+			return 0;
+		}
+	}
+
+	private String formatStatus(CurrentStatus status) {
+		return String.format("%s: %s.</br>Ping / Pongs: %d", status.getTimestamp(), status.getRandomString(),
+				status.getPingpong());
 	}
 
 }

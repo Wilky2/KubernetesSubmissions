@@ -1,0 +1,7 @@
+spring.application.name: ping-pong-app
+
+server.port: ${PORT:8080}
+
+file:
+  path: ${FILEPATH:/usr/src/app/files}
+  pingpong: 'pingpong.txt'

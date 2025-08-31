@@ -1,3 +1,0 @@
-spring.application.name: ping-pong-app
-
-server.port: ${PORT:8080}

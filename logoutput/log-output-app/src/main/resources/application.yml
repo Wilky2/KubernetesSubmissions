@@ -5,3 +5,4 @@ server.port: ${PORT:8080}
 file:
   path: ${FILEPATH:/usr/src/app/files}
   name: 'app-log.json'
+  pingpong: 'pingpong.txt'

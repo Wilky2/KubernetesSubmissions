@@ -62,5 +62,7 @@ kubectl apply -f manifests
 /pingpong : Endpoint to request for the "pong 0" response
 
 ## Environment variable
+FILEPATH :  The file directory
+
 PORT: Server port
 

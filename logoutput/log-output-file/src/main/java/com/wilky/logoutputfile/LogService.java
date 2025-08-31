@@ -7,9 +7,7 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,9 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -40,39 +35,32 @@ public class LogService {
 		this.objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 	}
 
-	public void run() throws InterruptedException, StreamReadException, DatabindException, IOException {
+	public void run() throws IOException {
+		Map<String, Object> newEntry = buildEntry();
+		writeData(newEntry);
+	}
 
+	private Map<String, Object> buildEntry() {
 		long millis = System.currentTimeMillis();
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 		Timestamp currentTimestamp = new Timestamp(millis);
 		String formatted = currentTimestamp.toInstant().atZone(ZoneId.systemDefault()).format(formatter);
 
-		// File reference
-		File file = Paths.get(filePath, fileName).toFile();
+		Map<String, Object> entry = new LinkedHashMap<>();
+		entry.put("randomString", this.randomString);
+		entry.put("timestamp", formatted);
 
-		// Ensure directory exists
+		logger.info("Building new entry: " + entry);
+		return entry;
+	}
+
+	private void writeData(Map<String, Object> entry) throws IOException {
 		Files.createDirectories(Paths.get(filePath));
 
-		List<Map<String, String>> logs;
+		File file = Paths.get(filePath, fileName).toFile();
+		objectMapper.writeValue(file, entry);
 
-		if (file.exists()) {
-			// Load existing JSON array
-			logs = objectMapper.readValue(file, new TypeReference<List<Map<String, String>>>() {
-			});
-		} else {
-			logs = new ArrayList<>();
-		}
-
-		// Add new log entry
-		Map<String, String> entry = new LinkedHashMap<>();
-		entry.put("randomString", randomString);
-		entry.put("timestamp", formatted);
-		logs.add(entry);
-
-		logger.info("Adding " + entry + " in " + this.filePath + "/" + this.fileName);
-
-		// Write back to JSON file
-		objectMapper.writeValue(file, logs);
+		logger.info("Written entry to " + file.getAbsolutePath());
 	}
 
 }

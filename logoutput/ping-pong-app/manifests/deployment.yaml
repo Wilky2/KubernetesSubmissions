@@ -12,9 +12,16 @@ spec:
       labels:
         app: pingpong
     spec:
+      volumes:
+        - name: shared-log
+          persistentVolumeClaim:
+            claimName: log-claim
       containers:
         - name: pingpong
           image: wilky2/pingpong
           env:
             - name: PORT
               value: "4040"
+          volumeMounts:
+            - name: shared-log
+              mountPath: /usr/src/app/files

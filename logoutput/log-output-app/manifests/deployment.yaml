@@ -14,7 +14,8 @@ spec:
     spec:
       volumes:
         - name: shared-log
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: log-claim
       containers:
         - name: logoutput
           image: wilky2/logoutput
@@ -25,4 +26,4 @@ spec:
           image: wilky2/logoutputfile
           volumeMounts:
             - name: shared-log
-              mountPath: /usr/src/app/files 
+              mountPath: /usr/src/app/files

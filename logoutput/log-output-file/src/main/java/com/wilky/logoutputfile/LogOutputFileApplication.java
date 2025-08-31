@@ -14,7 +14,7 @@ public class LogOutputFileApplication {
 		while (true) {
 			try {
 				logService.run();
-			} catch (InterruptedException | IOException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			try {
