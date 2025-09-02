@@ -12,9 +12,16 @@ spec:
       labels:
         app: todoappwebserver
     spec:
+      volumes:
+        - name: todoapp
+          persistentVolumeClaim:
+            claimName: my-pv-claim
       containers:
         - name: todoappwebserver
           image: wilky2/todoappwebserver
           env:
             - name: PORT
               value: "3000"
+          volumeMounts:
+            - name: todoapp
+              mountPath: /usr/src/app/files

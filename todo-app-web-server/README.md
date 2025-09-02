@@ -60,6 +60,6 @@ kubectl apply -f manifests/deployment.yaml
 ## Environment variable
 PORT: Server port
 
-
+FILEPATH :  The file directory
 
 
