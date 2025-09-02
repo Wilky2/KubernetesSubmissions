@@ -7,6 +7,18 @@
 	<body>
 		<h1>The project App</h1>
 		<img th:src="@{/image/current}" alt="Current image" width=300 height=300/>
+		
+		<form>
+	        <input type="text" name="todo" maxlength="140" placeholder="Enter your todo (max 140 chars)" />
+	        <button type="button">Create todo</button>
+	    </form>
+	    
+	    <ul>
+	        <li>Learn JavaScript</li>
+	        <li>Learn React</li>
+	        <li>Build a Project</li>
+	    </ul>
+	    
 		<p>Devops with kubernetes 2025</p>
 	</body>
 </html>
