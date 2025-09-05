@@ -65,3 +65,5 @@ kubectl apply -f manifests
 FILEPATH :  The file directory
 
 PORT: Server port
+
+PINGPONG_URL: URL to get the value of ping/pongs

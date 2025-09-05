@@ -1,6 +1,6 @@
 spring.application.name: ping-pong-app
 
-server.port: ${PORT:8080}
+server.port: ${PORT:4040}
 
 file:
   path: ${FILEPATH:/usr/src/app/files}

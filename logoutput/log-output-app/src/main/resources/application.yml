@@ -6,3 +6,6 @@ file:
   path: ${FILEPATH:/usr/src/app/files}
   name: 'app-log.json'
   pingpong: 'pingpong.txt'
+
+pingpong:
+  url: ${PINGPONG_URL:http://localhost:4040/value}

@@ -14,16 +14,18 @@ spec:
     spec:
       volumes:
         - name: shared-log
-          persistentVolumeClaim:
-            claimName: my-pv-claim
+          emptyDir: {}
       containers:
         - name: logoutput
-          image: wilky2/logoutput
+          image: wilky2/logoutput:2.1
           volumeMounts:
             - name: shared-log
               mountPath: /usr/src/app/files
+          env:
+            - name: PINGPONG_URL
+              value: "http://pingpong-svc:4234/value"
         - name: logoutputfile
-          image: wilky2/logoutputfile
+          image: wilky2/logoutputfile:2.1
           volumeMounts:
             - name: shared-log
               mountPath: /usr/src/app/files

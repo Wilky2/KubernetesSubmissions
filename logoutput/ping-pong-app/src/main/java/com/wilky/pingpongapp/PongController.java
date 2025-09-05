@@ -37,6 +37,11 @@ public class PongController {
 		return response;
 	}
 
+	@GetMapping("value")
+	public long getValue() throws IOException {
+		return this.counter;
+	}
+
 	private void writeData(long counter) throws IOException {
 		Files.createDirectories(Paths.get(filePath));
 
