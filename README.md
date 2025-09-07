@@ -21,3 +21,4 @@
 ### Chapter 3
 
 - [2.1.](https://github.com/Wilky2/KubernetesSubmissions/tree/2.1/logoutput)
+- [2.2.](https://github.com/Wilky2/KubernetesSubmissions/tree/2.2/todo-app)

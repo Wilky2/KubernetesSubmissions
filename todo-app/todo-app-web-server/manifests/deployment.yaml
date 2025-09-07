@@ -18,10 +18,14 @@ spec:
             claimName: my-pv-claim
       containers:
         - name: todoappwebserver
-          image: wilky2/todoappwebserver
+          image: wilky2/todoappwebserver:2.2
           env:
             - name: PORT
               value: "3000"
+            - name: TODO_BACKEND_URL
+              value: "http://todobackend-svc:4345/todos"
+            - name: FORM_URL
+              value: "http://localhost:8081/todos"
           volumeMounts:
             - name: todoapp
               mountPath: /usr/src/app/files

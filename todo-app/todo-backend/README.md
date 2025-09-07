@@ -1,6 +1,6 @@
-# Todo App Web Server
+# Todo Backend
 
-A web server for a todo app create with Spring Boot.
+Application that serves backend for the todo app.
 
 ---
 
@@ -30,7 +30,7 @@ This will generate the JAR file in the `target/` directory.
 Navigate to the `target/` folder and run:
 
 ```bash
-java -jar todo-app-web-server-0.0.1-SNAPSHOT.jar
+java -jar todo-backend-0.0.1-SNAPSHOT.jar
 ```
 
 ---
@@ -40,13 +40,13 @@ java -jar todo-app-web-server-0.0.1-SNAPSHOT.jar
 1. **Build the Docker image:**
 
 ```bash
-docker build -t todoappwebserver .
+docker build -t todobackend .
 ```
 
 2. **Run the container:**
 
 ```bash
-docker run todoappwebserver
+docker run todobackend
 ```
 
 ---
@@ -60,6 +60,5 @@ kubectl apply -f manifests/deployment.yaml
 ## Environment variable
 PORT: Server port
 
-FILEPATH :  The file directory
-
+REDIRECT_URL: URL to redirect the user to after saving a todo.
 

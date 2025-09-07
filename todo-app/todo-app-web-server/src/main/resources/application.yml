@@ -2,6 +2,9 @@ spring.application.name: todo-app-web-server
 
 server.port: ${PORT:8080}
 
+todobackend: ${TODO_BACKEND_URL:http://localhost:4040/todos}
+form.url: ${FORM_URL:http://localhost:4040/todos}
+
 file:
   path: ${FILEPATH:/usr/src/app/files}
   img-name: current-image

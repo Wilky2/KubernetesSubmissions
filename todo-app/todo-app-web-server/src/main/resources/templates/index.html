@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TodoApp</title>
+	</head>
+	<body>
+		<h1>The project App</h1>
+		<img th:src="@{/image/current}" alt="Current image" width=300 height=300/>
+		
+		<form th:action="${form_url}" method="post" th:object="${todo}">
+	        <input type="text" th:field="*{name}" maxlength="140" placeholder="Enter your todo (max 140 chars)" />
+	        <button type="submit">Create todo</button>
+	    </form>
+	    
+	    <div th:if="${list_empty}">
+	        <p>No todos yet</p>
+	    </div>
+	    <ul th:if="${!list_empty}">
+	        <li th:each="t : ${todos}" th:text="${t.name}"></li>
+	    </ul>
+	    
+		<p>Devops with kubernetes 2025</p>
+	</body>
+</html>
