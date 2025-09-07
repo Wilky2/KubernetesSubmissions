@@ -1,4 +1,4 @@
-# Log Output
+# Todo App
 
 ## [Todo App Web Server](./todo-app-web-server)
 
