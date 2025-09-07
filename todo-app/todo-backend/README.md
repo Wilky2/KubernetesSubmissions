@@ -54,7 +54,7 @@ docker run todobackend
 ## Deploy to kubernetes
 
 ```bash
-kubectl apply -f manifests/deployment.yaml
+kubectl apply -f manifests
 ```
 
 ## Environment variable
