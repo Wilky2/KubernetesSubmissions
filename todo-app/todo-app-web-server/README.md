@@ -53,7 +53,7 @@ docker run todoappwebserver
 
 ## Deploy to kubernetes
 
-Create a PersistentVolume named my-pv and a PersistentVolumeClaim named my-pv-claim using the [manifests](../../manifests) in that folder.
+Create a PersistentVolume named 'my-pv' and a PersistentVolumeClaim named 'my-pv-claim' in the namespace 'project' using the [manifests](../../manifests) in that folder.
 
 ```bash
 kubectl apply -f manifests
