@@ -25,19 +25,24 @@ public class LogController {
 	private final RestTemplate restTemplate;
 	private final ObjectMapper objectMapper;
 	private static final Logger logger = LoggerFactory.getLogger(LogController.class);
+	private String configFilePath;
+	private String message;
 
 	public LogController(@Value("${file.path}") String filePath, @Value("${file.name}") String fileName,
-			@Value("${file.pingpong}") String pingpong, @Value("${pingpong.url}") String pingpongUrl) {
+			@Value("${file.pingpong}") String pingpong, @Value("${pingpong.url}") String pingpongUrl,
+			@Value("${message}") String message) {
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.pingpong = pingpong;
 		this.pingpongUrl = pingpongUrl;
 		this.restTemplate = new RestTemplate();
 		this.objectMapper = new ObjectMapper();
+		this.configFilePath = "/usr/src/app/info/information.txt";
+		this.message = message;
 	}
 
 	@GetMapping("status")
-	public String getCurrentStatus() {
+	public String getCurrentStatus() throws IOException {
 		CurrentStatus status = readJsonStatus();
 		long pingpongValue = this.fetchPingpongValue();
 		status.setPingpong(pingpongValue);
@@ -86,9 +91,11 @@ public class LogController {
 		}
 	}
 
-	private String formatStatus(CurrentStatus status) {
-		return String.format("%s: %s.</br>Ping / Pongs: %d", status.getTimestamp(), status.getRandomString(),
-				status.getPingpong());
+	private String formatStatus(CurrentStatus status) throws IOException {
+		logger.info("Reading file content from " + this.configFilePath);
+		String content = Files.readString(Paths.get(this.configFilePath));
+		return String.format("file content: %s</br>env variable: MESSAGE=%s</br>%s: %s.</br>Ping / Pongs: %d", content,
+				this.message, status.getTimestamp(), status.getRandomString(), status.getPingpong());
 	}
 
 }

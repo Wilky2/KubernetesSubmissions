@@ -9,3 +9,5 @@ file:
 
 pingpong:
   url: ${PINGPONG_URL:http://localhost:4040/value}
+
+message: ${MESSAGE:""}

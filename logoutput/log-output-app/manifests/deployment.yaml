@@ -16,15 +16,26 @@ spec:
       volumes:
         - name: shared-log
           emptyDir: {}
+        - name: config-map
+          configMap:
+            name: config-log
       containers:
         - name: logoutput
-          image: wilky2/logoutput:2.1
+          image: wilky2/logoutput:2.5
+          imagePullPolicy: Always
           volumeMounts:
             - name: shared-log
               mountPath: /usr/src/app/files
+            - name: config-map
+              mountPath: /usr/src/app/info
           env:
             - name: PINGPONG_URL
               value: "http://pingpong-svc:4234/value"
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-log
+                  key: message
         - name: logoutputfile
           image: wilky2/logoutputfile:2.1
           volumeMounts:
