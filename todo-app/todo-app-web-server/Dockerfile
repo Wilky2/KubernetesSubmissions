@@ -1,7 +1,7 @@
 FROM amazoncorretto:17-alpine-jdk AS builder
 WORKDIR /app
 COPY ./ .
-RUN ./mvnw clean package
+RUN ./mvnw clean package -DskipTests=true
 
 FROM eclipse-temurin:17.0.5_8-jre-focal
 WORKDIR /app

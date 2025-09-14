@@ -19,7 +19,7 @@ spec:
             claimName: my-pv-claim
       containers:
         - name: todoappwebserver
-          image: wilky2/todoappwebserver:2.2
+          image: wilky2/todoappwebserver:2.6
           env:
             - name: PORT
               value: "3000"
@@ -27,6 +27,16 @@ spec:
               value: "http://todobackend-svc:4345/todos"
             - name: FORM_URL
               value: "http://localhost:8081/todos"
+            - name: FILEPATH
+              value: /usr/src/app/files
+            - name: IMG_NAME
+              value: "current-image"
+            - name: IMG_URL
+              value: "https://picsum.photos"
+            - name: IMG_SIZE_MIN
+              value: "0"
+            - name: IMG_SIZE_MAX
+              value: "5000"
           volumeMounts:
             - name: todoapp
               mountPath: /usr/src/app/files

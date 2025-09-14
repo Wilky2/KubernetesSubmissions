@@ -20,7 +20,7 @@ public class ImageController {
 	private final Path dirPath;
 	private final String imgName;
 
-	public ImageController(@Value("${file.path}") String filePath, @Value("${file.img-name}") String imgName) {
+	public ImageController(@Value("${img.path}") String filePath, @Value("${img.name}") String imgName) {
 		this.dirPath = Paths.get(filePath);
 		this.imgName = imgName;
 	}

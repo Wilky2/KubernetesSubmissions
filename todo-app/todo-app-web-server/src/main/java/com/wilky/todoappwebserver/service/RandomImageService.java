@@ -32,12 +32,20 @@ public class RandomImageService {
 	private final Path dirPath;
 	private final String imageBaseName;
 	private final HttpClient http;
+	private final String imgUrl;
+	private final int imgSizeMin;
+	private final int imgSizeMax;
 
 	private final Random random = new Random();
 
-	public RandomImageService(@Value("${file.path}") String dirPath, @Value("${file.img-name}") String imageBaseName) {
+	public RandomImageService(@Value("${img.path}") String dirPath, @Value("${img.name}") String imageBaseName,
+			@Value("${img.url}") String imgUrl, @Value("${img.size.min}") int imgSizeMin,
+			@Value("${img.size.max}") int imgSizeMax) {
 		this.dirPath = Paths.get(dirPath);
 		this.imageBaseName = imageBaseName;
+		this.imgUrl = imgUrl;
+		this.imgSizeMin = imgSizeMin;
+		this.imgSizeMax = imgSizeMax;
 		// On ne suit PAS automatiquement les redirections (on veut lire Location
 		// nous-mêmes)
 		this.http = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.NEVER)
@@ -70,7 +78,7 @@ public class RandomImageService {
 	private void fetchAndSaveOnce() throws Exception {
 		// Étape A : appel initial pour récupérer la redirection (302 + Location)
 		int size = generateRandomSize();
-		URI initial = URI.create("https://picsum.photos/" + size);
+		URI initial = URI.create(this.imgUrl + "/" + size);
 		logger.info("Generated random image size: " + size);
 		HttpRequest req = HttpRequest.newBuilder(initial).GET().timeout(Duration.ofSeconds(20)).build();
 
@@ -111,10 +119,13 @@ public class RandomImageService {
 
 	// --------- utilitaires ---------
 
-	private int generateRandomSize() {
+	private int generateRandomSize() throws Exception {
 		// Par exemple entre 400 et 1600 pixels
-		int min = 0;
-		int max = 5000;
+		int min = this.imgSizeMin;
+		int max = this.imgSizeMax;
+		if (min >= max) {
+			throw new IllegalStateException("IMG_SIZE_MIN must be lower than IMG_SIZE_MAX");
+		}
 		return random.nextInt(max - min + 1) + min;
 	}
 

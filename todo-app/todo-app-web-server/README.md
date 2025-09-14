@@ -68,3 +68,10 @@ TODO_BACKEND_URL: URL to get the todo list from the backend
 
 FORM_URL: URL the form submits the todo to.
 
+IMG_NAME: Name of the download image in the file directory
+
+IMG_URL: Url to download the image
+
+IMG_SIZE_MIN: Minimum size of the image in pixels
+
+IMG_SIZE_MAX: Maximum size of the image in pixels

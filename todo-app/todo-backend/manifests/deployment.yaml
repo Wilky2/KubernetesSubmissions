@@ -15,7 +15,9 @@ spec:
     spec:
       containers:
         - name: todobackend
-          image: wilky2/todobackend:2.2
+          image: wilky2/todobackend:2.6
           env:
             - name: REDIRECT_URL
               value: "http://localhost:8081"
+            - name: PORT
+              value: "4040"

@@ -1,5 +1,5 @@
 spring.application.name: todo-backend
 
-server.port: ${PORT:4040}
+server.port: ${PORT}
 
-redirect.url: ${REDIRECT_URL:http://localhost:8080}
+redirect.url: ${REDIRECT_URL}

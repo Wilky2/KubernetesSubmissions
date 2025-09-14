@@ -1,10 +1,14 @@
 spring.application.name: todo-app-web-server
 
-server.port: ${PORT:8080}
+server.port: ${PORT}
 
-todobackend: ${TODO_BACKEND_URL:http://localhost:4040/todos}
-form.url: ${FORM_URL:http://localhost:4040/todos}
+todobackend: ${TODO_BACKEND_URL}
+form.url: ${FORM_URL}
 
-file:
-  path: ${FILEPATH:/usr/src/app/files}
-  img-name: current-image
+img:
+  path: ${FILEPATH}
+  name: ${IMG_NAME}
+  url: ${IMG_URL}
+  size:
+    min: ${IMG_SIZE_MIN}
+    max: ${IMG_SIZE_MAX}
