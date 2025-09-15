@@ -27,3 +27,4 @@
 - [2.5.](https://github.com/Wilky2/KubernetesSubmissions/tree/2.5/logoutput)
 - [2.6.](https://github.com/Wilky2/KubernetesSubmissions/tree/2.6/todo-app)
 - [2.7.](https://github.com/Wilky2/KubernetesSubmissions/tree/2.7/logoutput)
+- [2.8.](https://github.com/Wilky2/KubernetesSubmissions/tree/2.8/todo-app)

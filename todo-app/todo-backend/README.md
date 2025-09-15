@@ -58,7 +58,18 @@ kubectl apply -f manifests
 ```
 
 ## Environment variable
-PORT: Server port
 
 REDIRECT_URL: URL to redirect the user to after saving a todo.
+
+PORT: The port on which the application runs.
+
+DATABASE_URL: Hostname or IP address of the PostgreSQL server.
+
+DATABASE_PORT: Port of the PostgreSQL server.
+
+DATABASE_NAME: Name of the PostgreSQL database to connect to.
+
+DATABASE_USERNAME: Username for authenticating to the PostgreSQL database.
+
+DATABASE_PASSWORD: Password for authenticating to the PostgreSQL database.
 

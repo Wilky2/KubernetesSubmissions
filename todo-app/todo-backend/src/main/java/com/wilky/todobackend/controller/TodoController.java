@@ -1,6 +1,5 @@
-package com.wilky.todobackend;
+package com.wilky.todobackend.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.wilky.todobackend.model.Todo;
+import com.wilky.todobackend.service.TodoService;
+
 @RestController
 @RequestMapping("todos")
 public class TodoController {
 
-	private final List<Todo> todos;
+	private final TodoService todoService;
 
 	private final String redirectUrl;
 
-	public TodoController(@Value("${redirect.url}") String redirectUrl) {
-		this.todos = new ArrayList<>();
+	public TodoController(@Value("${redirect.url}") String redirectUrl, TodoService todoService) {
+		this.todoService = todoService;
 		this.redirectUrl = redirectUrl;
 	}
 
@@ -32,7 +34,7 @@ public class TodoController {
 	@PostMapping
 	public RedirectView saveTask(@ModelAttribute Todo todo) {
 		log.info("Saving " + todo);
-		todos.add(todo);
+		this.todoService.save(todo);
 		log.info("Redirect to " + this.redirectUrl);
 		RedirectView redirectView = new RedirectView(this.redirectUrl);
 		redirectView.setStatusCode(HttpStatus.SEE_OTHER);
@@ -41,6 +43,6 @@ public class TodoController {
 
 	@GetMapping
 	public List<Todo> getTasks() {
-		return todos;
+		return this.todoService.getAllTodos();
 	}
 }

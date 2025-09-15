@@ -15,9 +15,15 @@ spec:
     spec:
       containers:
         - name: todobackend
-          image: wilky2/todobackend:2.6
+          image: wilky2/todobackend:2.8
+          imagePullPolicy: Always
           env:
             - name: REDIRECT_URL
               value: "http://localhost:8081"
             - name: PORT
               value: "4040"
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+            - secretRef:
+                name: postgres-secret
