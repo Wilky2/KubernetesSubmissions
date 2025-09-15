@@ -1,4 +1,4 @@
-package com.wilky.pingpongapp;
+package com.wilky.pingpongapp.controller;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,33 +13,40 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wilky.pingpongapp.model.Pong;
+import com.wilky.pingpongapp.service.PongService;
+
 @RestController
 public class PongController {
 
-	private long counter;
+	private Pong counter;
 
 	private final String filePath;
 	private final String fileName;
 
 	private static final Logger logger = LoggerFactory.getLogger(PongController.class);
 
-	public PongController(@Value("${file.path}") String filePath, @Value("${file.pingpong}") String fileName) {
+	private PongService pongService;
+
+	public PongController(@Value("${file.path}") String filePath, @Value("${file.pingpong}") String fileName,
+			PongService pongService) {
 		this.filePath = filePath;
 		this.fileName = fileName;
-		this.counter = this.readPingpongValue();
+		this.pongService = pongService;
+		this.counter = this.pongService.getCurrentPong();
 	}
 
 	@GetMapping("pingpong")
 	public String getPong() throws IOException {
-		this.counter++;
-		String response = "pong " + this.counter;
-		this.writeData(this.counter);
+		this.counter.setCounter(this.counter.getCounter() + 1);
+		this.counter = this.pongService.save(this.counter);
+		String response = "pong " + this.counter.getCounter();
 		return response;
 	}
 
 	@GetMapping("value")
 	public long getValue() throws IOException {
-		return this.counter;
+		return this.counter.getCounter();
 	}
 
 	private void writeData(long counter) throws IOException {

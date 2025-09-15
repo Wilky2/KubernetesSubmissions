@@ -11,3 +11,7 @@ A Spring Boot application that reads that file and provides the content in the H
 ## [Ping Pong App](./ping-pong-app)
 
 Application that simply responds with "pong 0" to a GET request
+
+## [Postgres DB](./postgres-db)
+
+This directory contains the Kubernetes YAML manifests for the PostgreSQL database.

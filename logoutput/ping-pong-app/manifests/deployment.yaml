@@ -18,10 +18,21 @@ spec:
           emptyDir: {}
       containers:
         - name: pingpong
-          image: wilky2/pingpong:2.1
+          image: wilky2/pingpong:2.7
+          imagePullPolicy: Always
           env:
             - name: PORT
               value: "4040"
+            - name: DATABASE_URL
+              value: "postgres-svc"
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: "pong_db"
+            - name: DATABASE_USERNAME
+              value: "postgres"
+            - name: DATABASE_PASSWORD
+              value: "postgres"
           volumeMounts:
             - name: shared-log
               mountPath: /usr/src/app/files

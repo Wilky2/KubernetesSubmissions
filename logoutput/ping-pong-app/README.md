@@ -53,6 +53,8 @@ docker run ping-pong-app
 
 ## Deploy to kubernetes
 
+Before deploying with Kubernetes, apply the YAML manifests in this [directory](../postgres-db) to set up the PostgreSQL database.
+
 ```bash
 kubectl apply -f manifests
 ```
@@ -62,7 +64,17 @@ kubectl apply -f manifests
 /pingpong : Endpoint to request for the "pong 0" response
 
 ## Environment variable
-FILEPATH :  The file directory
+FILEPATH :  Absolute path where files (including pingpong data) are stored.
 
-PORT: Server port
+PORT: The port on which the application runs.
+
+DATABASE_URL: Hostname or IP address of the PostgreSQL server.
+
+DATABASE_PORT: Port of the PostgreSQL server.
+
+DATABASE_NAME: Name of the PostgreSQL database to connect to.
+
+DATABASE_USERNAME: Username for authenticating to the PostgreSQL database.
+
+DATABASE_PASSWORD: Password for authenticating to the PostgreSQL database.
 
