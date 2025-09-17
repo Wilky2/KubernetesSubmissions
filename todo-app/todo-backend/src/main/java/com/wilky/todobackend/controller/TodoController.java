@@ -33,7 +33,14 @@ public class TodoController {
 
 	@PostMapping
 	public RedirectView saveTask(@ModelAttribute Todo todo) {
-		log.info("Saving " + todo);
+		String name = todo.getName();
+		log.info("Received new Todo: {}", name);
+		if (name != null && name.length() > 140) {
+			log.warn("Todo not allowed: exceeds 140 characters -> {}", name);
+			RedirectView redirectView = new RedirectView(this.redirectUrl);
+			redirectView.setStatusCode(HttpStatus.SEE_OTHER);
+			return redirectView;
+		}
 		this.todoService.save(todo);
 		log.info("Redirect to " + this.redirectUrl);
 		RedirectView redirectView = new RedirectView(this.redirectUrl);

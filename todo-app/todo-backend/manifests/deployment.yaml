@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todobackend
-          image: wilky2/todobackend:2.8
+          image: wilky2/todobackend:2.10
           imagePullPolicy: Always
           env:
             - name: REDIRECT_URL
