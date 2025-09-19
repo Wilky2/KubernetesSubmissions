@@ -33,3 +33,4 @@
 
 ### Chapter 4
 - [3.1.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.1/logoutput)
+- [3.2.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.2/logoutput)
