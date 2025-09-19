@@ -30,12 +30,13 @@ spec:
           volumeMounts:
             - name: postgres-data-storage
               mountPath: /var/lib/postgresql/18/docker
+              subPath: postgres
   volumeClaimTemplates:
     - metadata:
+        namespace: exercises
         name: postgres-data-storage
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
