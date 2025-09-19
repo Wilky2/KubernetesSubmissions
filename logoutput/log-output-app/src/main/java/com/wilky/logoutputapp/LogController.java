@@ -41,6 +41,11 @@ public class LogController {
 		this.message = message;
 	}
 
+	@GetMapping("")
+	public String testingPurpose() throws IOException {
+		return "The app is running";
+	}
+
 	@GetMapping("status")
 	public String getCurrentStatus() throws IOException {
 		CurrentStatus status = readJsonStatus();

@@ -21,7 +21,7 @@ spec:
             name: config-log
       containers:
         - name: logoutput
-          image: wilky2/logoutput:2.5
+          image: wilky2/logoutput:3.2
           imagePullPolicy: Always
           volumeMounts:
             - name: shared-log

@@ -13,11 +13,18 @@ spec:
           service:
             name: logoutput-svc
             port:
-              number: 1234
+              number: 80
       - path: /pingpong
         pathType: Prefix
         backend:
           service:
             name: pingpong-svc
             port:
-              number: 4234
+              number: 80
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: logoutput-svc
+            port:
+              number: 80
