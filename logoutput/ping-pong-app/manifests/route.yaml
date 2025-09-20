@@ -10,7 +10,12 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /pingpong
+        value: /
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          replacePrefixMatch: /pingpong
     backendRefs:
     - name: pingpong-svc
       port: 40
