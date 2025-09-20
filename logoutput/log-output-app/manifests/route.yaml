@@ -2,7 +2,7 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
   namespace: exercises
-  name: logoutput-route
+  name: pingpong-route
 spec:
   parentRefs:
   - name: exercises-gateway
@@ -10,7 +10,12 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /status
+        value: /
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          replacePrefixMatch: /pingpong
     backendRefs:
-    - name: logoutput-svc
-      port: 80
+    - name: pingpong-svc
+      port: 40

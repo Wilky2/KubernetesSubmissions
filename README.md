@@ -35,3 +35,4 @@
 - [3.1.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.1/logoutput)
 - [3.2.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.2/logoutput)
 - [3.3.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.3/logoutput)
+- [3.4.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.4/logoutput)
