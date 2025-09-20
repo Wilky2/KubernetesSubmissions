@@ -3,11 +3,13 @@ kind: Service
 metadata:
   namespace: project
   name: todobackend-svc
+  annotations:
+      cloud.google.com/neg: '{"exposed_ports": {"80":{}}}'
 spec:
   type: ClusterIP
   selector:
     app: todobackend
   ports:
-    - port: 4345
+    - port: 80
       protocol: TCP
       targetPort: 4040

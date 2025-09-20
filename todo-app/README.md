@@ -15,3 +15,7 @@ This directory contains the Kubernetes YAML manifests for my-pv PersistentVolume
 ## [Postgres DB](./postgres-db)
 
 This directory contains the Kubernetes YAML manifests for the PostgreSQL database.
+
+## [Project namespace](./namespace)
+
+This directory contains the Kubernetes YAML manifests for the namespace "project".

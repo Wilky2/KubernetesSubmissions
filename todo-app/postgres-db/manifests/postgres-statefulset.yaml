@@ -32,10 +32,10 @@ spec:
               mountPath: /var/lib/postgresql/18/docker
   volumeClaimTemplates:
     - metadata:
+        namespace: project
         name: postgres-project-data-storage
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
