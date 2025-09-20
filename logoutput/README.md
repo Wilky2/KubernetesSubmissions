@@ -15,3 +15,7 @@ Application that simply responds with "pong 0" to a GET request
 ## [Postgres DB](./postgres-db)
 
 This directory contains the Kubernetes YAML manifests for the PostgreSQL database.
+
+## [Exercises namespace](./namespace)
+
+This directory contains the Kubernetes YAML manifests for the namespace "exercises".
