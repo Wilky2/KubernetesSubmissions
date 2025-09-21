@@ -45,7 +45,7 @@ jobs:
 
       # ------------------ FRONTEND ------------------
       - name: 'Form the frontend image name'
-        run: echo "FRONTEND_IMAGE_TAG=${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.FRONTEND_IMAGE }}:${{ env.BRANCH }}-${GITHUB_SHA}" >> $GITHUB_ENV
+        run: echo "FRONTEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$FRONTEND_IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Build frontend
         run: docker build todo-app/todo-app-web-server --tag $FRONTEND_IMAGE_TAG
@@ -55,7 +55,7 @@ jobs:
 
       # ------------------ BACKEND ------------------
       - name: 'Form the backend image name'
-        run: echo "BACKEND_IMAGE_TAG=${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.BACKEND_IMAGE }}:${{ env.BRANCH }}-${GITHUB_SHA}" >> $GITHUB_ENV
+        run: echo "BACKEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$BACKEND_IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Build backend
         run: docker build todo-app/todo-backend --tag $BACKEND_IMAGE_TAG
