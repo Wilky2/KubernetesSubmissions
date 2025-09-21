@@ -78,8 +78,8 @@ jobs:
       - name: Deploy
         run: |
           cd todo-app
-          kustomize edit set image todoappwebserver=$FRONTEND_IMAGE_TAG
-          kustomize edit set image todobackend=$BACKEND_IMAGE_TAG
+          kustomize edit set image FRONTEND/IMAGE=$FRONTEND_IMAGE_TAG
+          kustomize edit set image BACKEND/IMAGE=$BACKEND_IMAGE_TAG
           kustomize build . | kubectl apply -f -
           kubectl rollout status deployment ${{ env.FRONTEND_SERVICE }} -n project
           kubectl rollout status deployment ${{ env.BACKEND_SERVICE }} -n project
