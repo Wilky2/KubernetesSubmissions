@@ -38,4 +38,6 @@
 - [3.3.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.3/logoutput)
 - [3.4.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.4/logoutput)
 - [3.5.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.5/todo-app)
-- [3.6.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.6/todo-app)
+#### Exercise 3.6 solution
+- [3.6.-workflow](https://github.com/Wilky2/KubernetesSubmissions/tree/3.6/.github/workflows)
+- [3.5.-todo-app](https://github.com/Wilky2/KubernetesSubmissions/tree/3.6/todo-app)
