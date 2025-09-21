@@ -9,12 +9,11 @@ env:
   GKE_ZONE: europe-north1-b
   REGISTRY: europe-north1-docker.pkg.dev
   REPOSITORY: wilky
-  FRONTEND-IMAGE: todoappwebserver
-  BACkEND-IMAGE: todobackend
+  FRONTEND_IMAGE: todoappwebserver
+  BACKEND_IMAGE: todobackend
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
 
-# ...
 jobs:
   build-publish-deploy:
     name: Build, Publish and Deploy
@@ -24,59 +23,53 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-# ...
-  - uses: google-github-actions/auth@v2
-    with:
-      credentials_json: '${{ secrets.GKE_SA_KEY }}'
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
 
-  - name: 'Set up Cloud SDK'
-    uses: google-github-actions/setup-gcloud@v2
+      - name: 'Set up Cloud SDK'
+        uses: google-github-actions/setup-gcloud@v2
 
-  - name: 'Use gcloud CLI'
-    run: gcloud info
+      - name: 'Use gcloud CLI'
+        run: gcloud info
 
-# ...
-  - run: gcloud --quiet auth configure-docker
+      - run: gcloud --quiet auth configure-docker
 
-# ...
-  - name: 'Get GKE credentials'
-    uses: 'google-github-actions/get-gke-credentials@v2'
-    with:
-      cluster_name: '${{ env.GKE_CLUSTER }}'
-      project_id: '${{ env.PROJECT_ID }}'
-      location: '${{ env.GKE_ZONE }}'
+      - name: 'Get GKE credentials'
+        uses: 'google-github-actions/get-gke-credentials@v2'
+        with:
+          cluster_name: '${{ env.GKE_CLUSTER }}'
+          project_id: '${{ env.PROJECT_ID }}'
+          location: '${{ env.GKE_ZONE }}'
 
-# ...
-  - name : 'Form the frontend image name'
-    run: echo "FRONTEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$FRONTEND-IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+      # ------------------ FRONTEND ------------------
+      - name: 'Form the frontend image name'
+        run: echo "FRONTEND_IMAGE_TAG=${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.FRONTEND_IMAGE }}:${{ env.BRANCH }}-${GITHUB_SHA}" >> $GITHUB_ENV
 
-# ...
-  - name: Build
-    run: docker build todo-app/todo-app-web-server --tag $FRONTEND_IMAGE_TAG
+      - name: Build frontend
+        run: docker build todo-app/todo-app-web-server --tag $FRONTEND_IMAGE_TAG
 
-  - name: Publish
-    run: docker push $FRONTEND_IMAGE_TAG
+      - name: Publish frontend
+        run: docker push $FRONTEND_IMAGE_TAG
 
-# ...
-  - name : 'Form the backend image name'
-    run: echo "BACkEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$BACkEND-IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+      # ------------------ BACKEND ------------------
+      - name: 'Form the backend image name'
+        run: echo "BACKEND_IMAGE_TAG=${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.BACKEND_IMAGE }}:${{ env.BRANCH }}-${GITHUB_SHA}" >> $GITHUB_ENV
 
-# ...
-  - name: Build
-    run: docker build todo-app/todo-backend --tag $BACkEND_IMAGE_TAG
+      - name: Build backend
+        run: docker build todo-app/todo-backend --tag $BACKEND_IMAGE_TAG
 
-  - name: Publish
-    run: docker push $BACkEND_IMAGE_TAG
+      - name: Publish backend
+        run: docker push $BACKEND_IMAGE_TAG
 
-# ...
-  - name: Set up Kustomize
-    uses: imranismail/setup-kustomize@v2.1.0
+      # ------------------ DEPLOY ------------------
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2.1.0
 
-# ...
-  - name: Deploy
-    run: |-
-      kustomize edit set image FRONTEND/IMAGE=$FRONTEND_IMAGE_TAG
-      kustomize edit set image BACKEND/IMAGE=$BACkEND_IMAGE_TAG
-      kustomize build . | kubectl apply -f -
-      kubectl rollout status deployment $SERVICE
-      kubectl get services -o wide
+      - name: Deploy
+        run: |
+          kustomize edit set image todoappwebserver=$FRONTEND_IMAGE_TAG
+          kustomize edit set image todobackend=$BACKEND_IMAGE_TAG
+          kustomize build . | kubectl apply -f -
+          kubectl rollout status deployment ${{ env.SERVICE }}
+          kubectl get services -o wide
