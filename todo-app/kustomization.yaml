@@ -16,3 +16,8 @@ resources:
   - todo-backend/manifests/postgres-config.yaml
   - todo-backend/manifests/postgres-secret.yaml
   - todo-backend/manifests/wikipedia-todo-cronjob.yaml
+images:
+  - name: FRONTEND/IMAGE
+    newName: wilky2/todoappwebserver:2.8
+  - name: BACKEND/IMAGE
+    newName: wilky2/todobackend:2.10
