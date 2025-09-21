@@ -19,7 +19,7 @@ spec:
             claimName: my-pv-claim
       containers:
         - name: todoappwebserver
-          image: wilky2/todoappwebserver:2.8
+          image: FRONTEND/IMAGE
           imagePullPolicy: Always
           env:
             - name: PORT
