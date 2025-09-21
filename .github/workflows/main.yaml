@@ -11,7 +11,8 @@ env:
   REPOSITORY: wilky
   FRONTEND_IMAGE: todoappwebserver
   BACKEND_IMAGE: todobackend
-  SERVICE: dwk-environments
+  FRONTEND_SERVICE: todoappwebserver-dep
+  BACKEND_SERVICE: todobackend-dep
   BRANCH: ${{ github.ref_name }}
 
 jobs:
@@ -80,5 +81,6 @@ jobs:
           kustomize edit set image todoappwebserver=$FRONTEND_IMAGE_TAG
           kustomize edit set image todobackend=$BACKEND_IMAGE_TAG
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment ${{ env.SERVICE }} -n project
+          kubectl rollout status deployment ${{ env.FRONTEND_SERVICE }} -n project
+          kubectl rollout status deployment ${{ env.BACKEND_SERVICE }} -n project
           kubectl get services -o wide -n project
