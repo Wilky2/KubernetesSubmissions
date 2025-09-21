@@ -76,7 +76,7 @@ jobs:
 
       - name: Deploy
         run: |
-          cd todoapp
+          cd todo-app
           kustomize edit set image todoappwebserver=$FRONTEND_IMAGE_TAG
           kustomize edit set image todobackend=$BACKEND_IMAGE_TAG
           kustomize build . | kubectl apply -f -
