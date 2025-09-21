@@ -34,7 +34,8 @@ jobs:
       - name: 'Use gcloud CLI'
         run: gcloud info
 
-      - run: gcloud --quiet auth configure-docker
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGISTRY }} --quiet
 
       - name: 'Get GKE credentials'
         uses: 'google-github-actions/get-gke-credentials@v2'
@@ -47,7 +48,7 @@ jobs:
       - name: 'Form the frontend image name'
         run: echo "FRONTEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$FRONTEND_IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
         
-      - name: 'Form the frontend image name'
+      - name: 'Show the frontend image name'
         run: echo $FRONTEND_IMAGE_TAG
 
       - name: Build frontend
@@ -60,7 +61,7 @@ jobs:
       - name: 'Form the backend image name'
         run: echo "BACKEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$BACKEND_IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
         
-      - name: 'Form the backend image name'
+      - name: 'Show the backend image name'
         run: echo $BACKEND_IMAGE_TAG
 
       - name: Build backend
