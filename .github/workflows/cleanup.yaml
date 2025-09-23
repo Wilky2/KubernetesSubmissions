@@ -39,10 +39,10 @@ jobs:
 
       - name: Cleanup
         run: |
-          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
+          if [ "${{ github.event.ref }}" = "master" ]; then
             NAMESPACE="project"
           else
-            NAMESPACE="${GITHUB_REF#refs/heads/}"
+            NAMESPACE="${{ github.event.ref }}"
           fi
           
           echo $NAMESPACE
