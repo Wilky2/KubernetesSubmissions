@@ -78,9 +78,22 @@ jobs:
       - name: Deploy
         run: |
           cd todo-app
+  
+          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
+            NAMESPACE="project"
+          else
+            NAMESPACE="${GITHUB_REF#refs/heads/}"
+          fi
+
+          kubectl create namespace $NAMESPACE || true
+          kubectl config set-context --current --namespace=$NAMESPACE
+
+          kustomize edit set namespace $NAMESPACE
           kustomize edit set image FRONTEND/IMAGE=$FRONTEND_IMAGE_TAG
           kustomize edit set image BACKEND/IMAGE=$BACKEND_IMAGE_TAG
+
           kustomize build . | kubectl apply -f -
-          kubectl rollout status deployment ${{ env.FRONTEND_SERVICE }} -n project
-          kubectl rollout status deployment ${{ env.BACKEND_SERVICE }} -n project
-          kubectl get services -o wide -n project
+
+          kubectl rollout status deployment ${{ env.FRONTEND_SERVICE }} -n $NAMESPACE
+          kubectl rollout status deployment ${{ env.BACKEND_SERVICE }} -n $NAMESPACE
+          kubectl get services -o wide -n $NAMESPACE
