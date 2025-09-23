@@ -44,5 +44,7 @@ jobs:
           else
             NAMESPACE="${GITHUB_REF#refs/heads/}"
           fi
+          
+          echo %NAMESPACE
 
           kubectl delete namespace $NAMESPACE --ignore-not-found=true
