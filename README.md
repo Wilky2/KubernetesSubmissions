@@ -44,3 +44,5 @@
 #### Exercise 3.7 solution
 - [3.7.-workflow](https://github.com/Wilky2/KubernetesSubmissions/tree/3.7/.github/workflows)
 - [3.7.-todo-app](https://github.com/Wilky2/KubernetesSubmissions/tree/3.7/todo-app)
+
+- [3.8.-workflow](https://github.com/Wilky2/KubernetesSubmissions/tree/3.8/.github/workflows)
