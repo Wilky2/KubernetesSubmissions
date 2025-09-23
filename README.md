@@ -41,3 +41,6 @@
 #### Exercise 3.6 solution
 - [3.6.-workflow](https://github.com/Wilky2/KubernetesSubmissions/tree/3.6/.github/workflows)
 - [3.6.-todo-app](https://github.com/Wilky2/KubernetesSubmissions/tree/3.6/todo-app)
+#### Exercise 3.7 solution
+- [3.7.-workflow](https://github.com/Wilky2/KubernetesSubmissions/tree/3.7/.github/workflows)
+- [3.7.-todo-app](https://github.com/Wilky2/KubernetesSubmissions/tree/3.7/todo-app)
