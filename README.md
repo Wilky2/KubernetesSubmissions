@@ -135,4 +135,4 @@
     * PersistentVolumeClaims are tied to specific zones.
     * HA requires setting up replication manually (Patroni, Stolon, or Helm charts).
 
-- [3.10.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.10/postgres-db)
+- [3.10.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.10/todo-app/postgres-db)
