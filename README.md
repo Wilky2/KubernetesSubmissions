@@ -51,7 +51,7 @@
 
 ##### **DBaaS (Google Cloud SQL)**
 
-###### ✅ Pros
+###### Pros
 
 * **Ease of initialization**:
 
@@ -77,7 +77,7 @@
 
     * Integrated IAM roles, VPC peering, private IP, SSL/TLS by default.
 
-###### ❌ Cons
+###### Cons
 
 * **Cost**:
 
