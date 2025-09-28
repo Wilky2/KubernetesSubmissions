@@ -41,5 +41,13 @@ spec:
           volumeMounts:
             - name: todoapp
               mountPath: /usr/src/app/files
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "200m"
+            limits:
+              memory: "64Mi"
+              cpu: "250m"
+
   strategy:
     type: RollingUpdate
