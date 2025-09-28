@@ -137,3 +137,7 @@
 
 - [3.10.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.10/todo-app/postgres-db)
 - [3.11.](https://github.com/Wilky2/KubernetesSubmissions/tree/3.11/todo-app)
+
+#### Exercise 3.12 solution
+
+![TodoApp Log](./log-todo-app.png)
