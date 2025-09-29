@@ -141,3 +141,5 @@
 #### Exercise 3.12 solution
 
 ![TodoApp Log](./log-todo-app.png)
+
+- [4.1.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.1/logoutput)

@@ -36,6 +36,13 @@ spec:
                 configMapKeyRef:
                   name: config-log
                   key: message
+          readinessProbe:
+            httpGet:
+              path: /value
+              port: 4234
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
         - name: logoutputfile
           image: wilky2/logoutputfile:2.1
           volumeMounts:
