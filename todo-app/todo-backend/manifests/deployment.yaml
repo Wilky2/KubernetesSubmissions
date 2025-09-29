@@ -34,3 +34,16 @@ spec:
             limits:
               memory: "64Mi"
               cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/db
+              port: 4040
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            initialDelaySeconds: 20 # Initial delay until the liveness is tested
+            periodSeconds: 5 # How often to test
+            httpGet:
+              path: /actuator/health/db
+              port: 4040

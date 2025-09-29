@@ -38,8 +38,8 @@ spec:
                   key: message
           readinessProbe:
             httpGet:
-              path: /value
-              port: 4234
+              path: /status
+              port: 8080
             initialDelaySeconds: 10
             periodSeconds: 5
             failureThreshold: 3

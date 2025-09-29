@@ -19,4 +19,4 @@ images:
   - name: FRONTEND/IMAGE
     newName: wilky2/todoappwebserver:2.8
   - name: BACKEND/IMAGE
-    newName: wilky2/todobackend:2.10
+    newName: wilky2/todobackend:4.2
