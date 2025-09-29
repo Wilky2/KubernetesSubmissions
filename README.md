@@ -142,5 +142,14 @@
 
 ![TodoApp Log](./log-todo-app.png)
 
+### Chapter 5
+
 - [4.1.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.1/logoutput)
 - [4.2.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.2/todo-app)
+
+#### Exercise 4.3 solution
+
+```promql
+sum(
+  kube_pod_info{namespace="prometheus", created_by_kind="StatefulSet"}
+)
