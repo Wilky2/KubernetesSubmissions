@@ -8,6 +8,6 @@ spec:
   selector:
     app: pingpong
   ports:
-    - port: 40
+    - port: 4234
       protocol: TCP
       targetPort: 4040

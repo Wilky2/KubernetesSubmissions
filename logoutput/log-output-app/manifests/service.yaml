@@ -8,6 +8,6 @@ spec:
   selector:
     app: logoutput
   ports:
-    - port: 80
+    - port: 1234
       protocol: TCP
       targetPort: 8080

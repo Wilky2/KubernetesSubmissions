@@ -153,3 +153,6 @@
 sum(
   kube_pod_info{namespace="prometheus", created_by_kind="StatefulSet"}
 )
+```
+
+- [4.4.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.4/logoutput)

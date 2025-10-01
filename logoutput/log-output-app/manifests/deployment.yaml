@@ -43,6 +43,13 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 5
             failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            failureThreshold: 3
         - name: logoutputfile
           image: wilky2/logoutputfile:2.1
           volumeMounts:
