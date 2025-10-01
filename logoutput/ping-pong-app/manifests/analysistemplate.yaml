@@ -1,18 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: pingpong-cpu-usage-check
+  name: pingpong-cpu-usage
   namespace: exercises
 spec:
   metrics:
-    - name: exercises-cpu-usage
+    - name: pingpong-cpu-usage
       initialDelay: 2m
-      successCondition: result < 500m
-      failureLimit: 1
+      successCondition: result < 0.8
       provider:
         prometheus:
           address: http://kube-prometheus-stack-1758-prometheus.prometheus.svc.cluster.local:9090
           query: |
-            sum(
-              rate(container_cpu_usage_seconds_total{namespace="exercises", container!=""}[5m])
+            scalar(
+              sum(
+                rate(container_cpu_usage_seconds_total{namespace="exercises", container!=""}[2m])
+              )
             )
