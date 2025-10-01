@@ -1,25 +1,63 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>TodoApp</title>
-	</head>
-	<body>
-		<h1>The project App</h1>
-		<img th:src="@{/image/current}" alt="Current image" width=300 height=300/>
-		
-		<form th:action="${form_url}" method="post" th:object="${todo}">
-	        <input type="text" th:field="*{name}" maxlength="140" placeholder="Enter your todo (max 140 chars)" />
-	        <button type="submit">Create todo</button>
-	    </form>
-	    
-	    <div th:if="${list_empty}">
-	        <p>No todos yet</p>
-	    </div>
-	    <ul th:if="${!list_empty}">
-	        <li th:each="t : ${todos}" th:text="${t.name}"></li>
-	    </ul>
-	    
-		<p>Devops with kubernetes 2025</p>
-	</body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoApp</title>
+</head>
+<body>
+    <h1>The project App</h1>
+    <img th:src="@{/image/current}" alt="Current image" width="300" height="300"/>
+    
+    <!-- Add new todo form -->
+    <form th:action="${form_url}" method="post" th:object="${todo}">
+        <input type="text" th:field="*{name}" maxlength="140" placeholder="Enter your todo (max 140 chars)" />
+        <button type="submit">Create todo</button>
+    </form>
+    
+    <div th:if="${list_empty}">
+        <p>No todos yet</p>
+    </div>
+
+    <!-- Section for incomplete todos -->
+    <div th:if="${!list_empty}">
+        <h2>Todo</h2>
+        <ul>
+            <li th:each="t : ${todos}" th:if="${!t.done}">
+			    <span th:text="${t.name}"></span>
+			    <button type="button" th:onclick="|markAsDone(${t.id})|">Mark as done</button>
+			</li>
+        </ul>
+
+        <!-- Section for completed todos -->
+        <h2>Done</h2>
+        <ul>
+            <li th:each="t : ${todos}" th:if="${t.done}">
+                <span th:text="${t.name}"></span>
+            </li>
+        </ul>
+    </div>
+    
+    <p><a href="https://courses.mooc.fi/org/uh-cs/courses/devops-with-kubernetes">Devops with kubernetes 2025</a> University of Helsinki</p>
+
+    <!-- JavaScript for PUT request -->
+    <script th:inline="javascript">
+	    async function markAsDone(id) {
+	        const formUrl = /*[[${form_url}]]*/ "";
+	        try {
+	            const response = await fetch(formUrl + "/" + id, {
+	                method: 'PUT'
+	            });
+	            if (response.ok) {
+	                location.reload();
+	            } else {
+	                alert("Failed to mark as done");
+	            }
+	        } catch (error) {
+	            console.error(error);
+	            alert("Error marking todo as done");
+	        }
+	    }
+	</script>
+
+</body>
 </html>

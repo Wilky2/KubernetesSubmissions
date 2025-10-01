@@ -34,7 +34,6 @@ spec:
               mountPath: /var/lib/postgresql
   volumeClaimTemplates:
     - metadata:
-        namespace: project
         name: postgres-project-data-storage
       spec:
         accessModes: ["ReadWriteOnce"]

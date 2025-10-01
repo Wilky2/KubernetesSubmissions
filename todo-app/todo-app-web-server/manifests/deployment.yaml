@@ -41,25 +41,16 @@ spec:
           volumeMounts:
             - name: todoapp
               mountPath: /usr/src/app/files
-          resources:
-            requests:
-              memory: "32Mi"
-              cpu: "200m"
-            limits:
-              memory: "64Mi"
-              cpu: "250m"
           readinessProbe:
             httpGet:
-              path: /
+              path: /actuator/health
               port: 3000
-            initialDelaySeconds: 10
+            initialDelaySeconds: 20
             periodSeconds: 5
             failureThreshold: 3
           livenessProbe:
-            initialDelaySeconds: 20 # Initial delay until the liveness is tested
-            periodSeconds: 5 # How often to test
+            initialDelaySeconds: 40
+            periodSeconds: 5
             httpGet:
-              path: /
+              path: /actuator/health
               port: 3000
-  strategy:
-    type: RollingUpdate

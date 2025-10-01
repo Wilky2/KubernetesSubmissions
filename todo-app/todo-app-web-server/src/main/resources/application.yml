@@ -12,3 +12,12 @@ img:
   size:
     min: ${IMG_SIZE_MIN}
     max: ${IMG_SIZE_MAX}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always

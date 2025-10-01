@@ -24,4 +24,10 @@ public class TodoService {
 	public List<Todo> getAllTodos() {
 		return this.todoRepository.findAll();
 	}
+
+	public Todo markedAsDone(long id) {
+		Todo todo = this.todoRepository.findById(id).get();
+		todo.setDone(true);
+		return this.todoRepository.save(todo);
+	}
 }

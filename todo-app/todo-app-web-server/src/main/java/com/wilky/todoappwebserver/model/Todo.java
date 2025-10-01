@@ -8,4 +8,6 @@ public class Todo {
 	private long id;
 
 	private String name;
+
+	private boolean isDone;
 }

@@ -20,4 +20,7 @@ public class Todo {
 
 	@Column
 	private String name;
+
+	@Column
+	private boolean isDone = false;
 }
