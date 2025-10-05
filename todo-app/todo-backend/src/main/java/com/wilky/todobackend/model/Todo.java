@@ -1,5 +1,7 @@
 package com.wilky.todobackend.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,4 +25,13 @@ public class Todo {
 
 	@Column
 	private boolean isDone = false;
+
+	@Column(nullable = true)
+	String userId;
+
+	@Column
+	LocalDateTime createdAt;
+
+	@Column(nullable = true)
+	LocalDateTime updateAt;
 }

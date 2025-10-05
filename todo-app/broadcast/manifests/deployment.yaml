@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: project
+  name: broadcast-dep
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: broadcast
+  template:
+    metadata:
+      labels:
+        app: broadcast
+    spec:
+      containers:
+        - name: broadcast
+          image: BROADCAST/IMAGE
+          imagePullPolicy: Always
+          env:
+            - name: DISCORD_WEBHOOK_URL
+              value: "https://discord.com/api/webhooks/{generated part of the url}"
+            - name: NATS_HOST
+              value: "nats://my-nats:4222"
+            - name: TODO_CREATED_SUBJECT
+              value: "todo_created"
+            - name: TODO_COMPLETED_SUBJECT
+              value: "todo_completed"

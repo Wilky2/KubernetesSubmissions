@@ -1,0 +1,10 @@
+spring.application.name: broadcast
+
+nats:
+  url: ${NATS_HOST}
+
+discordwebhookurl: ${DISCORD_WEBHOOK_URL}
+
+subject:
+  created: ${TODO_CREATED_SUBJECT}
+  completed: ${TODO_COMPLETED_SUBJECT}

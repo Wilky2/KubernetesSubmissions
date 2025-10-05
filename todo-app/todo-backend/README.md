@@ -75,3 +75,8 @@ DATABASE_USERNAME: Username for authenticating to the PostgreSQL database.
 
 DATABASE_PASSWORD: Password for authenticating to the PostgreSQL database.
 
+NATS_HOST: Adress to connect to nats server
+
+TODO_CREATED_SUBJECT : Subject to publish created todo
+
+TODO_COMPLETED_SUBJECT : Subject to publish completed todo

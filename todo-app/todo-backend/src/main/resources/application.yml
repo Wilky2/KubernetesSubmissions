@@ -14,6 +14,13 @@ spring:
   jpa:
     hibernate.ddl-auto: update
 
+nats:
+  host: ${NATS_HOST}
+
+subject:
+  created: ${TODO_CREATED_SUBJECT}
+  completed: ${TODO_COMPLETED_SUBJECT}
+
 management:
   endpoints:
     web:
