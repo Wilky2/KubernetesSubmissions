@@ -158,3 +158,4 @@ sum(
 - [4.4.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.4/logoutput)
 - [4.5.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.5/todo-app)
 - [4.6.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.6/todo-app)
+- [4.7.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.7/logoutput)
