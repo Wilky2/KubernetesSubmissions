@@ -2,6 +2,9 @@ name: Build and publish application
 
 on:
   push:
+    paths:
+      - "logoutput/**"
+      - ".github/workflows/logoutput.yml"
 
 jobs:
   build-publish:

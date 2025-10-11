@@ -12,12 +12,6 @@ resources:
 - ping-pong-app/manifests/service.yaml
 - ping-pong-app/manifests/analysistemplate.yaml
 images:
-- name: BACKEND/IMAGE
-  newName: wilky2/todobackend:4.6
-- name: BROADCAST/IMAGE
-  newName: wilky2/broadcast:4.6
-- name: FRONTEND/IMAGE
-  newName: wilky2/todoappwebserver:4.5
 - name: LOGOUTPUT/IMAGE
   newName: wilky2/logoutput
   newTag: c8b2cc34271d03c02e52a3dfa218e785d46e818a
