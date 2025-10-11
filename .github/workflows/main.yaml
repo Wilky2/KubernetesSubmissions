@@ -22,9 +22,9 @@ jobs:
       # tag image with the GitHub SHA to get a unique tag
       - name: Build and publish backend
         run: |-
-          docker build /logoutput/log-output-app --tag "wilky2/logoutput:$GITHUB_SHA" .
+          docker build /logoutput/log-output-app --tag "wilky2/logoutput:$GITHUB_SHA"
           docker push "wilky2/logoutput:$GITHUB_SHA"
-          docker build /logoutput/ping-pong-app --tag "wilky2/pingpong:$GITHUB_SHA" .
+          docker build /logoutput/ping-pong-app --tag "wilky2/pingpong:$GITHUB_SHA"
           docker push "wilky2/pingpong:$GITHUB_SHA"
 
       - name: Set up Kustomize
