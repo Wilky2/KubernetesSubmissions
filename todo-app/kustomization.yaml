@@ -1,24 +1,27 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - namespace/manifests/namespace.yaml
-  - volume/manifests/persistentvolumeclaim.yaml
-  - volume/manifests/persistentvolume.yaml
-  - postgres-db/manifests/postgres-statefulset.yaml
-  - postgres-db/manifests/postgres-svc.yaml
-  - todo-app-web-server/manifests/deployment.yaml
-  - todo-app-web-server/manifests/ingress.yaml
-  - todo-app-web-server/manifests/service.yaml
-  - todo-backend/manifests/deployment.yaml
-  - todo-backend/manifests/service.yaml
-  - todo-backend/manifests/postgres-config.yaml
-  - todo-backend/manifests/postgres-secret.yaml
-  - todo-backend/manifests/wikipedia-todo-cronjob.yaml
-  - broadcast/manifests/deployment.yaml
+- namespace/manifests/namespace.yaml
+- volume/manifests/persistentvolumeclaim.yaml
+- volume/manifests/persistentvolume.yaml
+- postgres-db/manifests/postgres-statefulset.yaml
+- postgres-db/manifests/postgres-svc.yaml
+- todo-app-web-server/manifests/deployment.yaml
+- todo-app-web-server/manifests/ingress.yaml
+- todo-app-web-server/manifests/service.yaml
+- todo-backend/manifests/deployment.yaml
+- todo-backend/manifests/service.yaml
+- todo-backend/manifests/postgres-config.yaml
+- todo-backend/manifests/postgres-secret.yaml
+- todo-backend/manifests/wikipedia-todo-cronjob.yaml
+- broadcast/manifests/deployment.yaml
 images:
-  - name: FRONTEND/IMAGE
-    newName: wilky2/todoappwebserver:4.5
-  - name: BACKEND/IMAGE
-    newName: wilky2/todobackend:4.6
-  - name: BROADCAST/IMAGE
-    newName: wilky2/broadcast:4.6
+- name: BACKEND/IMAGE
+  newName: wilky2/todobackend
+  newTag: 70546d4373b6c6d0ceaaca44d5a77a896263bd58
+- name: BROADCAST/IMAGE
+  newName: wilky2/broadcast
+  newTag: 70546d4373b6c6d0ceaaca44d5a77a896263bd58
+- name: FRONTEND/IMAGE
+  newName: wilky2/todoappwebserver
+  newTag: 70546d4373b6c6d0ceaaca44d5a77a896263bd58
