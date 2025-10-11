@@ -14,7 +14,7 @@ resources:
 images:
 - name: LOGOUTPUT/IMAGE
   newName: wilky2/logoutput
-  newTag: c8b2cc34271d03c02e52a3dfa218e785d46e818a
+  newTag: 6a4097027c28eee0676178f897ea691c3ec21b31
 - name: PINGPONG/IMAGE
   newName: wilky2/pingpong
-  newTag: c8b2cc34271d03c02e52a3dfa218e785d46e818a
+  newTag: 6a4097027c28eee0676178f897ea691c3ec21b31
