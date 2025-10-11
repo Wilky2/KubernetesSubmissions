@@ -1,99 +1,39 @@
-name: Release application
+name: Build and publish application
 
 on:
   push:
 
-env:
-  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: dwk-cluster
-  GKE_ZONE: europe-north1-b
-  REGISTRY: europe-north1-docker.pkg.dev
-  REPOSITORY: wilky
-  FRONTEND_IMAGE: todoappwebserver
-  BACKEND_IMAGE: todobackend
-  FRONTEND_SERVICE: todoappwebserver-dep
-  BACKEND_SERVICE: todobackend-dep
-  BRANCH: ${{ github.ref_name }}
-
 jobs:
-  build-publish-deploy:
-    name: Build, Publish and Deploy
+  build-publish:
+    name: Build, Push, Release
     runs-on: ubuntu-latest
-    environment: todoapp
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - uses: google-github-actions/auth@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 'Set up Cloud SDK'
-        uses: google-github-actions/setup-gcloud@v2
+      # tag image with the GitHub SHA to get a unique tag
+      - name: Build and publish backend
+        run: |-
+          docker build /logoutput/log-output-app --tag "wilky2/logoutput:$GITHUB_SHA" .
+          docker push "wilky2/logoutput:$GITHUB_SHA"
+          docker build /logoutput/ping-pong-app --tag "wilky2/pingpong:$GITHUB_SHA" .
+          docker push "wilky2/pingpong:$GITHUB_SHA"
 
-      - name: 'Use gcloud CLI'
-        run: gcloud info
-
-      - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker ${{ env.REGISTRY }} --quiet
-
-      - name: 'Get GKE credentials'
-        uses: 'google-github-actions/get-gke-credentials@v2'
-        with:
-          cluster_name: '${{ env.GKE_CLUSTER }}'
-          project_id: '${{ env.PROJECT_ID }}'
-          location: '${{ env.GKE_ZONE }}'
-
-      # ------------------ FRONTEND ------------------
-      - name: 'Form the frontend image name'
-        run: echo "FRONTEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$FRONTEND_IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
-        
-      - name: 'Show the frontend image name'
-        run: echo $FRONTEND_IMAGE_TAG
-
-      - name: Build frontend
-        run: docker build todo-app/todo-app-web-server --tag $FRONTEND_IMAGE_TAG
-
-      - name: Publish frontend
-        run: docker push $FRONTEND_IMAGE_TAG
-
-      # ------------------ BACKEND ------------------
-      - name: 'Form the backend image name'
-        run: echo "BACKEND_IMAGE_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$BACKEND_IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
-        
-      - name: 'Show the backend image name'
-        run: echo $BACKEND_IMAGE_TAG
-
-      - name: Build backend
-        run: docker build todo-app/todo-backend --tag $BACKEND_IMAGE_TAG
-
-      - name: Publish backend
-        run: docker push $BACKEND_IMAGE_TAG
-
-      # ------------------ DEPLOY ------------------
       - name: Set up Kustomize
-        uses: imranismail/setup-kustomize@v2.1.0
+        uses: imranismail/setup-kustomize@v2
 
-      - name: Deploy
-        run: |
-          cd todo-app
-  
-          if [ "${GITHUB_REF#refs/heads/}" = "master" ]; then
-            NAMESPACE="project"
-          else
-            NAMESPACE="${GITHUB_REF#refs/heads/}"
-          fi
-
-          kubectl create namespace $NAMESPACE || true
-          kubectl config set-context --current --namespace=$NAMESPACE
-
-          kustomize edit set namespace $NAMESPACE
-          kustomize edit set image FRONTEND/IMAGE=$FRONTEND_IMAGE_TAG
-          kustomize edit set image BACKEND/IMAGE=$BACKEND_IMAGE_TAG
-
-          kustomize build . | kubectl apply -f -
-
-          kubectl rollout status deployment ${{ env.FRONTEND_SERVICE }} -n $NAMESPACE
-          kubectl rollout status deployment ${{ env.BACKEND_SERVICE }} -n $NAMESPACE
-          kubectl get services -o wide -n $NAMESPACE
+      - name: Use right image
+        run: kustomize edit set image LOGOUTPUT/IMAGE=wilky2/logoutput:$GITHUB_SHA
+        run: kustomize edit set image PINGPONG/IMAGE=wilky2/pingpong:$GITHUB_SHA
+      - name: commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'kustomization.yaml'
+          message: New version released ${{ github.sha }}
