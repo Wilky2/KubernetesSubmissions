@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace/manifests/namespace.yaml
+  - postgres-db/manifests/postgres-statefulset.yaml
+  - postgres-db/manifests/postgres-svc.yaml
+  - log-output-app/manifests/deployment.yaml
+  - log-output-app/manifests/ingress.yaml
+  - log-output-app/manifests/service.yaml
+  - log-output-app/manifests/configmap.yaml
+  - ping-pong-app/manifests/rollout.yaml
+  - ping-pong-app/manifests/service.yaml
+  - ping-pong-app/manifests/analysistemplate.yaml
+images:
+  - name: FRONTEND/IMAGE
+    newName: wilky2/todoappwebserver:4.5
+  - name: BACKEND/IMAGE
+    newName: wilky2/todobackend:4.6
+  - name: BROADCAST/IMAGE
+    newName: wilky2/broadcast:4.6
