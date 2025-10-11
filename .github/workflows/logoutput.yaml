@@ -5,6 +5,8 @@ on:
     paths:
       - "logoutput/**"
       - ".github/workflows/logoutput.yml"
+      - "!logoutput/kustomization.yaml"
+      - "!logoutput/README.md"
 
 jobs:
   build-publish:

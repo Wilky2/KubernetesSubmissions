@@ -5,7 +5,9 @@ on:
     paths:
       - "todo-app/**"
       - ".github/workflows/todo.yml"
-      
+      - "!todo-app/kustomization.yaml"
+      - "!todo-app/README.md"
+
 jobs:
   build-publish:
     name: Build, Push, Release
