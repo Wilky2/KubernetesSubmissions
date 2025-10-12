@@ -1,4 +1,4 @@
-name: Build, Publish and Update Production
+name: Build and publish application
 
 on:
   push:
@@ -7,23 +7,22 @@ on:
 
 jobs:
   build-publish:
+    name: Build, Push, Release
     runs-on: ubuntu-latest
+    environment: docker
 
     steps:
-      # 1️⃣ Checkout the repository with full history
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2️⃣ Log in to Docker Hub
       - name: Docker login
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 3️⃣ Build and push Docker images with SHA tag
       - name: Build and push images
         run: |
           docker build ./todo-app/todo-app-web-server -t wilky2/todoappwebserver:${GITHUB_SHA}
@@ -33,21 +32,17 @@ jobs:
           docker build ./todo-app/broadcast -t wilky2/broadcast:${GITHUB_SHA}
           docker push wilky2/broadcast:${GITHUB_SHA}
 
-      # 4️⃣ Set up Kustomize
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v2
 
-      # 5️⃣ Update kustomization.yaml with new images
       - name: Update Kustomization Images
         run: |
           cd todo-app/config/overlays/prod
           kustomize edit set image FRONTEND/IMAGE=wilky2/todoappwebserver:${GITHUB_SHA} BACKEND/IMAGE=wilky2/todobackend:${GITHUB_SHA} BROADCAST/IMAGE=wilky2/broadcast:${GITHUB_SHA}
 
-      # 6️⃣ Switch to master branch
       - name: Switch to master
         run: git checkout master
 
-      # 7️⃣ Commit the updated kustomization.yaml
       - name: Commit kustomization.yaml
         uses: EndBug/add-and-commit@v9
         with:
@@ -55,7 +50,6 @@ jobs:
           message: "Update prod images for release ${{ github.ref_name }}"
           push: true
 
-      # 8️⃣ Update the current tag and move the 'prod' tag to point to master
       - name: Update Git tags
         run: |
           git tag -f ${{ github.ref_name }}  # move current release tag to new commit
