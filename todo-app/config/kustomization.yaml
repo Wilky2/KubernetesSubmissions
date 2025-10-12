@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- volume/manifests/persistentvolumeclaim.yaml
+- volume/manifests/persistentvolume.yaml
+- postgres-db/manifests/postgres-statefulset.yaml
+- postgres-db/manifests/postgres-svc.yaml
+- todo-app-web-server/manifests/deployment.yaml
+- todo-app-web-server/manifests/ingress.yaml
+- todo-app-web-server/manifests/service.yaml
+- todo-backend/manifests/deployment.yaml
+- todo-backend/manifests/service.yaml
+- todo-backend/manifests/postgres-config.yaml
+- todo-backend/manifests/postgres-secret.yaml
+- todo-backend/manifests/wikipedia-todo-cronjob.yaml
+- broadcast/manifests/deployment.yaml

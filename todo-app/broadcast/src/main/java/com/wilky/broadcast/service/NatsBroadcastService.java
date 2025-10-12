@@ -42,6 +42,15 @@ public class NatsBroadcastService {
 		log.info("✅ Connected to NATS at " + this.nats_url);
 		subscribeToSubject(todoCreatedSubject, "broadcast-queue");
 		subscribeToSubject(todoCompletedSubject, "broadcast-queue");
+		if (isDiscordEnabled()) {
+			log.info("🔗 Discord Webhook configured — messages will be sent to Discord");
+		} else {
+			log.warn("⚠️ Discord Webhook not defined — messages will NOT be sent to Discord");
+		}
+	}
+
+	private boolean isDiscordEnabled() {
+		return discordWebhookUrl != null && !discordWebhookUrl.trim().isEmpty();
 	}
 
 	private void subscribeToSubject(String subject, String queueGroup) throws Exception {
@@ -55,9 +64,13 @@ public class NatsBroadcastService {
 			String data = new String(natsMsg.getData(), StandardCharsets.UTF_8);
 			Message message = objectMapper.readValue(data, Message.class);
 			log.info("📥 Received " + message);
-			String prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(message.getTodo());
-			String discordText = "**" + message.getMessage() + "**\n\n```json\n" + prettyJson + "\n```";
-			sendToDiscord(discordText);
+			if (isDiscordEnabled()) {
+				String prettyJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(message.getTodo());
+				String discordText = "**" + message.getMessage() + "**\n\n```json\n" + prettyJson + "\n```";
+				sendToDiscord(discordText);
+			} else {
+				log.info("💬 Discord disabled — skipping message broadcast: {}", message.getMessage());
+			}
 		} catch (Exception e) {
 			log.error("Failed to process NATS message", e);
 		}

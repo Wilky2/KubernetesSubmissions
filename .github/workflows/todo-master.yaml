@@ -5,10 +5,9 @@ on:
     branches:
       - master
     paths:
-      - "logoutput/**"
-      - ".github/workflows/logoutput.yml"
-      - "!logoutput/kustomization.yaml"
-      - "!logoutput/README.md"
+      - "todo-app/**"
+      - ".github/workflows/todo-master.yaml"
+      - "!todo-app/config/overlays/staging/kustomization.yaml"
 
 jobs:
   build-publish:
@@ -29,21 +28,23 @@ jobs:
       # tag image with the GitHub SHA to get a unique tag
       - name: Build and publish backend
         run: |-
-          docker build ./logoutput/log-output-app --tag "wilky2/logoutput:$GITHUB_SHA"
-          docker push "wilky2/logoutput:$GITHUB_SHA"
-          docker build ./logoutput/ping-pong-app --tag "wilky2/pingpong:$GITHUB_SHA"
-          docker push "wilky2/pingpong:$GITHUB_SHA"
+          docker build ./todo-app/todo-app-web-server --tag "wilky2/todoappwebserver:$GITHUB_SHA"
+          docker push "wilky2/todoappwebserver:$GITHUB_SHA"
+          docker build ./todo-app/todo-backend --tag "wilky2/todobackend:$GITHUB_SHA"
+          docker push "wilky2/todobackend:$GITHUB_SHA"
+          docker build ./todo-app/broadcast --tag "wilky2/broadcast:$GITHUB_SHA"
+          docker push "wilky2/broadcast:$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
       - name: Use right image
         run: |
-          cd logoutput
-          kustomize edit set image LOGOUTPUT/IMAGE=wilky2/logoutput:$GITHUB_SHA PINGPONG/IMAGE=wilky2/pingpong:$GITHUB_SHA
+          cd todo-app/config/overlays/staging
+          kustomize edit set image FRONTEND/IMAGE=wilky2/todoappwebserver:$GITHUB_SHA BACKEND/IMAGE=wilky2/todobackend:$GITHUB_SHA BROADCAST/IMAGE=wilky2/broadcast:$GITHUB_SHA
         
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
         with:
-          add: './logoutput/kustomization.yaml'
+          add: './todo-app/config/overlays/staging/kustomization.yaml'
           message: New version released ${{ github.sha }}
