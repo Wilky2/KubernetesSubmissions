@@ -49,16 +49,6 @@ docker build -t todobackend .
 docker run todobackend
 ```
 
----
-
-## Deploy to kubernetes
-
-Before deploying with Kubernetes, apply the YAML manifests in this [directory](../postgres-db) to set up the PostgreSQL database.
-
-```bash
-kubectl apply -f manifests
-```
-
 ## Environment variable
 
 REDIRECT_URL: URL to redirect the user to after saving a todo.

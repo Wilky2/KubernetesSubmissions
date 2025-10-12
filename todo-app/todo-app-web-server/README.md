@@ -49,16 +49,6 @@ docker build -t todoappwebserver .
 docker run todoappwebserver
 ```
 
----
-
-## Deploy to kubernetes
-
-Create a PersistentVolume named 'my-pv' and a PersistentVolumeClaim named 'my-pv-claim' in the namespace 'project' using the [manifests](../volume) in that folder.
-
-```bash
-kubectl apply -f manifests
-```
-
 ## Environment variable
 PORT: Server port
 

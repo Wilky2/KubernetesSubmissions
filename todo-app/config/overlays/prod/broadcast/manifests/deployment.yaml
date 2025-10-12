@@ -10,3 +10,5 @@ spec:
           env:
             - name: DISCORD_WEBHOOK_URL
               value: "https://discord.com/api/webhooks/{generated part of the url}"
+            - name: NATS_HOST
+              value: "nats://my-nats-prod:4222"

@@ -12,14 +12,7 @@ Application that serves backend for the todo app.
 
 An application that subscribes to NATS messages and sends the messages to Discord.
 
-## [Volume](./volume)
 
-This directory contains the Kubernetes YAML manifests for my-pv PersistentVolume and my-pv-claim PersistentVolumeClaim.
+## [Project configuration](./config)
 
-## [Postgres DB](./postgres-db)
-
-This directory contains the Kubernetes YAML manifests for the PostgreSQL database.
-
-## [Project namespace](./namespace)
-
-This directory contains the Kubernetes YAML manifests for the namespace "project".
+This directory contains all the configurations for the "project".

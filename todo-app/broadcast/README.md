@@ -49,14 +49,6 @@ docker build -t broadcast .
 docker run broadcast
 ```
 
----
-
-## Deploy to kubernetes
-
-```bash
-kubectl apply -f manifests
-```
-
 ## Environment variable
 
 NATS_HOST: Adress to connect to nats server
