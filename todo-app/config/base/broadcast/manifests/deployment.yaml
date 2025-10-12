@@ -17,6 +17,8 @@ spec:
           image: BROADCAST/IMAGE
           imagePullPolicy: Always
           env:
+            - name: DISCORD_WEBHOOK_URL
+              value: ""
             - name: NATS_HOST
               value: "nats://my-nats:4222"
             - name: TODO_CREATED_SUBJECT
