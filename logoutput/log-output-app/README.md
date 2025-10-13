@@ -51,12 +51,6 @@ docker run log-output-app
 
 ---
 
-## Deploy to kubernetes
-
-```bash
-kubectl apply -f manifests
-```
-
 ## Endpoint
 
 /status : Endpoint to request the current status (timestamp and the random string)

@@ -12,10 +12,13 @@ A Spring Boot application that reads that file and provides the content in the H
 
 Application that simply responds with "pong 0" to a GET request
 
-## [Postgres DB](./postgres-db)
 
-This directory contains the Kubernetes YAML manifests for the PostgreSQL database.
+## [Exercises configuration](./config)
 
-## [Exercises namespace](./namespace)
+This directory contains all the configurations for the "exercises".
 
-This directory contains the Kubernetes YAML manifests for the namespace "exercises".
+## Deploy to kubernetes
+
+```bash
+kubectl apply -f config
+```

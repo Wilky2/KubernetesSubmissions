@@ -31,27 +31,3 @@ jobs:
           docker push wilky2/todobackend:${GITHUB_SHA}
           docker build ./todo-app/broadcast -t wilky2/broadcast:${GITHUB_SHA}
           docker push wilky2/broadcast:${GITHUB_SHA}
-
-      - name: Setup Kustomize
-        uses: imranismail/setup-kustomize@v2
-
-      - name: Update Kustomization Images
-        run: |
-          cd todo-app/config/overlays/prod
-          kustomize edit set image FRONTEND/IMAGE=wilky2/todoappwebserver:${GITHUB_SHA} BACKEND/IMAGE=wilky2/todobackend:${GITHUB_SHA} BROADCAST/IMAGE=wilky2/broadcast:${GITHUB_SHA}
-
-      - name: Switch to master
-        run: git checkout master
-
-      - name: Commit kustomization.yaml
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: './todo-app/config/overlays/prod/kustomization.yaml'
-          message: "Update prod images for release ${{ github.ref_name }}"
-          push: true
-
-      - name: Update Git tags
-        run: |
-          git tag -f ${{ github.ref_name }}  # move current release tag to new commit
-          git tag -f prod                    # move prod tag to same commit
-          git push origin --tags -f

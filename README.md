@@ -1,5 +1,9 @@
 # KubernetesSubmissions
 
+##Configurations repository
+
+[Tdod App project configuration repository](https://github.com/Wilky2/KubernetesConfigurations/tree/prod)
+
 ## Exercises
 
 ### Chapter 2

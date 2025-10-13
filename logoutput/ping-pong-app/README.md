@@ -51,14 +51,6 @@ docker run ping-pong-app
 
 ---
 
-## Deploy to kubernetes
-
-Before deploying with Kubernetes, apply the YAML manifests in this [directory](../postgres-db) to set up the PostgreSQL database.
-
-```bash
-kubectl apply -f manifests
-```
-
 ## Endpoint
 
 /pingpong : Endpoint to request for the "pong 0" response
