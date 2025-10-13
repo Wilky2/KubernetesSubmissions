@@ -4,11 +4,14 @@ kind: Kustomization
 resources:
 - ./../../base
 - namespace/manifests/namespace.yaml
+- volume/manifests/persistentvolumeclaim.yaml
+- volume/manifests/persistentvolume.yaml
 - postgres-db/manifests/backup.yaml
 - postgres-db/manifests/volume.yaml
 
 patchesStrategicMerge:
-  - broadcast/manifests/deployment.yaml
+- broadcast/manifests/deployment.yaml
+- todo-app-web-server/manifests/deployment.yaml
 
 namespace: production
 

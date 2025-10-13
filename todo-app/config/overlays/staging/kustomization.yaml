@@ -3,7 +3,12 @@ kind: Kustomization
 
 resources:
 - ./../../base
+- volume/manifests/persistentvolumeclaim.yaml
+- volume/manifests/persistentvolume.yaml
 - namespace/manifests/namespace.yaml
+
+patchesStrategicMerge:
+- todo-app-web-server/manifests/deployment.yaml
 
 namespace: staging
 

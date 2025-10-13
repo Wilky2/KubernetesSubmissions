@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoappwebserver-dep
+spec:
+  template:
+    spec:
+      volumes:
+        - name: todoapp
+          persistentVolumeClaim:
+            claimName: my-pv-claim
