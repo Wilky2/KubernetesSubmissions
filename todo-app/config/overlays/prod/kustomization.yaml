@@ -19,10 +19,10 @@ namespace: production
 images:
 - name: BACKEND/IMAGE
   newName: wilky2/todobackend
-  newTag: a218988b4fc83f5b120e0b47af93a15ab3f1ac17
+  newTag: 074d26ecc43b0fc580422eaeb0c5bab17c7d56da
 - name: BROADCAST/IMAGE
   newName: wilky2/broadcast
-  newTag: a218988b4fc83f5b120e0b47af93a15ab3f1ac17
+  newTag: 074d26ecc43b0fc580422eaeb0c5bab17c7d56da
 - name: FRONTEND/IMAGE
   newName: wilky2/todoappwebserver
-  newTag: a218988b4fc83f5b120e0b47af93a15ab3f1ac17
+  newTag: 074d26ecc43b0fc580422eaeb0c5bab17c7d56da
