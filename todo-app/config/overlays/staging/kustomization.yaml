@@ -17,10 +17,10 @@ namespace: staging
 images:
 - name: BACKEND/IMAGE
   newName: wilky2/todobackend
-  newTag: 972c2c6d67df0104561a276fcbff1dae5c3de366
+  newTag: 99cb9877f83bf046ef6601f1a49ba55e07ee541f
 - name: BROADCAST/IMAGE
   newName: wilky2/broadcast
-  newTag: 972c2c6d67df0104561a276fcbff1dae5c3de366
+  newTag: 99cb9877f83bf046ef6601f1a49ba55e07ee541f
 - name: FRONTEND/IMAGE
   newName: wilky2/todoappwebserver
-  newTag: 972c2c6d67df0104561a276fcbff1dae5c3de366
+  newTag: 99cb9877f83bf046ef6601f1a49ba55e07ee541f
