@@ -21,8 +21,6 @@ spec:
               value: "http://localhost:8081"
             - name: PORT
               value: "4040"
-            - name: NATS_HOST
-              value: "nats://my-nats:4222"
             - name: TODO_CREATED_SUBJECT
               value: "todo_created"
             - name: TODO_COMPLETED_SUBJECT

@@ -8,7 +8,9 @@ resources:
 - namespace/manifests/namespace.yaml
 
 patchesStrategicMerge:
+- broadcast/manifests/deployment.yaml
 - todo-app-web-server/manifests/deployment.yaml
+- todo-backend/manifests/deployment.yaml
 
 namespace: staging
 
