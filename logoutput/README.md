@@ -20,5 +20,5 @@ This directory contains all the configurations for the "exercises".
 ## Deploy to kubernetes
 
 ```bash
-kubectl apply -f config
+kubectl apply -k config
 ```
