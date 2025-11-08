@@ -167,3 +167,4 @@ sum(
 - [4.9.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.9/todo-app)
 - [4.10.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.10/todo-app)
 - [5.1.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.1/dummysite)
+- [5.2.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.2/ServiceMesh/exo_5_2)
