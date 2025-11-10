@@ -166,5 +166,9 @@ sum(
 - [4.8.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.8/todo-app)
 - [4.9.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.9/todo-app)
 - [4.10.](https://github.com/Wilky2/KubernetesSubmissions/tree/4.10/todo-app)
+
+### Chapter 6
+
 - [5.1.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.1/dummysite)
 - [5.2.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.2/ServiceMesh/exo_5_2)
+- [5.3.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.3/logoutput)

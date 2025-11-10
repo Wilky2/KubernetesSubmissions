@@ -17,6 +17,10 @@ Application that simply responds with "pong 0" to a GET request
 
 This directory contains all the configurations for the "exercises".
 
+## [Greeter App](./greeter-app)
+
+Application that responds with a HTTP GET request with a greeting.
+
 ## Deploy to kubernetes
 
 ```bash

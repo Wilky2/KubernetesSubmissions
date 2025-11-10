@@ -8,6 +8,9 @@ file:
   pingpong: 'pingpong.txt'
 
 pingpong:
-  url: ${PINGPONG_URL:http://localhost:4040/value}
+  url: ${PINGPONG_URL}
 
-message: ${MESSAGE:""}
+greeting:
+  url: ${GREETING_URL}
+
+message: ${MESSAGE}

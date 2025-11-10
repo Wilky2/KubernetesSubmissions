@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  namespace: exercises
+  name: logoutput-route
+spec:
+  parentRefs:
+  - name: logoutput-gateway
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /status
+    backendRefs:
+    - name: logoutput-svc
+      port: 80

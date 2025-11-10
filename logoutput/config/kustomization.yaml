@@ -4,17 +4,22 @@ resources:
 - namespace/manifests/namespace.yaml
 - postgres-db/manifests/postgres-statefulset.yaml
 - postgres-db/manifests/postgres-svc.yaml
+- gateway.yaml
 - log-output-app/manifests/deployment.yaml
-- log-output-app/manifests/ingress.yaml
 - log-output-app/manifests/service.yaml
+- log-output-app/manifests/route.yaml
 - log-output-app/manifests/configmap.yaml
 - ping-pong-app/manifests/rollout.yaml
-- ping-pong-app/manifests/service.yaml
+- ping-pong-app/manifests/service.yaml 
 - ping-pong-app/manifests/analysistemplate.yaml
+- ping-pong-app/manifests/route.yaml
+- greeter-app/manifests/deployment.yaml
+- greeter-app/manifests/service.yaml
+- greeter-app/manifests/route.yaml
 images:
 - name: LOGOUTPUT/IMAGE
-  newName: wilky2/logoutput
-  newTag: 6a4097027c28eee0676178f897ea691c3ec21b31
+  newName: wilky2/logoutput:5.3
 - name: PINGPONG/IMAGE
-  newName: wilky2/pingpong
-  newTag: 6a4097027c28eee0676178f897ea691c3ec21b31
+  newName: wilky2/pingpong:6a4097027c28eee0676178f897ea691c3ec21b31
+- name: GREETER/IMAGE
+  newName: wilky2/greeter:5.3

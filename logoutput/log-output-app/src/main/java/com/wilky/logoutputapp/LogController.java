@@ -20,21 +20,21 @@ public class LogController {
 
 	private final String filePath;
 	private final String fileName;
-	private final String pingpong;
 	private final String pingpongUrl;
+	private final String greetingUrl;
 	private final RestTemplate restTemplate;
 	private final ObjectMapper objectMapper;
 	private static final Logger logger = LoggerFactory.getLogger(LogController.class);
-	private String configFilePath;
-	private String message;
+	private final String configFilePath;
+	private final String message;
 
 	public LogController(@Value("${file.path}") String filePath, @Value("${file.name}") String fileName,
-			@Value("${file.pingpong}") String pingpong, @Value("${pingpong.url}") String pingpongUrl,
+			@Value("${pingpong.url}") String pingpongUrl, @Value("${greeting.url}") String greetingUrl,
 			@Value("${message}") String message) {
 		this.filePath = filePath;
 		this.fileName = fileName;
-		this.pingpong = pingpong;
 		this.pingpongUrl = pingpongUrl;
+		this.greetingUrl = greetingUrl;
 		this.restTemplate = new RestTemplate();
 		this.objectMapper = new ObjectMapper();
 		this.configFilePath = "/usr/src/app/info/information.txt";
@@ -50,18 +50,29 @@ public class LogController {
 	public String getCurrentStatus() throws IOException {
 		CurrentStatus status = readJsonStatus();
 		long pingpongValue = this.fetchPingpongValue();
+		String greetingMessage = this.fetchGreetingMessage();
+
 		status.setPingpong(pingpongValue);
-		return formatStatus(status);
+		return formatStatus(status, greetingMessage);
 	}
 
 	private long fetchPingpongValue() {
 		try {
 			Long response = restTemplate.getForObject(this.pingpongUrl, Long.class);
-			return response;
+			return response != null ? response : 0;
 		} catch (Exception e) {
-			logger.error("Erreur lors de la récupération du pingpong depuis {}", pingpongUrl, e);
+			logger.error("❌ Error fetching pingpong from {}", pingpongUrl, e);
+			return 0;
 		}
-		return 0;
+	}
+
+	private String fetchGreetingMessage() {
+		try {
+			return restTemplate.getForObject(this.greetingUrl, String.class);
+		} catch (Exception e) {
+			logger.error("⚠️ Failed to fetch greeting from {}", greetingUrl, e);
+			return "Unavailable";
+		}
 	}
 
 	private CurrentStatus readJsonStatus() {
@@ -80,27 +91,18 @@ public class LogController {
 		}
 	}
 
-	private long readPingpongValue() {
-		File pingpongFile = Paths.get(filePath, pingpong).toFile();
-
-		if (!pingpongFile.exists()) {
-			return 0;
-		}
-
-		try {
-			String value = new String(Files.readAllBytes(pingpongFile.toPath())).trim();
-			return Long.parseLong(value);
-		} catch (Exception e) {
-			logger.warn("Failed to read pingpong file, defaulting to 0", e);
-			return 0;
-		}
-	}
-
-	private String formatStatus(CurrentStatus status) throws IOException {
+	private String formatStatus(CurrentStatus status, String greetingMessage) throws IOException {
 		logger.info("Reading file content from " + this.configFilePath);
 		String content = Files.readString(Paths.get(this.configFilePath));
-		return String.format("file content: %s</br>env variable: MESSAGE=%s</br>%s: %s.</br>Ping / Pongs: %d", content,
-				this.message, status.getTimestamp(), status.getRandomString(), status.getPingpong());
+
+		return String.format("""
+				file content: %s</br>
+				env variable: MESSAGE=%s</br>
+				%s: %s.</br>
+				Ping / Pongs: %d</br>
+				greetings: %s
+				""", content, this.message, status.getTimestamp(), status.getRandomString(), status.getPingpong(),
+				greetingMessage);
 	}
 
 }

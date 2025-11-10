@@ -30,7 +30,9 @@ spec:
               mountPath: /usr/src/app/info
           env:
             - name: PINGPONG_URL
-              value: "http://pingpong-svc:4234/value"
+              value: "http://logoutput-gateway-istio/value"
+            - name: GREETING_URL
+              value: "http://logoutput-gateway-istio/greeter"
             - name: MESSAGE
               valueFrom:
                 configMapKeyRef:
