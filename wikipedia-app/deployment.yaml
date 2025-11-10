@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wikipedia-app
+  namespace: wikipedia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wikipedia
+  template:
+    metadata:
+      labels:
+        app: wikipedia
+    spec:
+      volumes:
+        - name: www-data
+          emptyDir: {}
+      initContainers:
+        - name: fetch-initial-page
+          image: curlimages/curl:8.8.0
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Fetching Kubernetes Wikipedia page..."
+              curl -sL https://en.wikipedia.org/wiki/Kubernetes -o /data/index.html
+          volumeMounts:
+            - name: www-data
+              mountPath: /data
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: www-data
+              mountPath: /usr/share/nginx/html
+        - name: random-wiki-updater
+          image: curlimages/curl:8.8.0
+          command: ["sh", "-c"]
+          args:
+            - |
+              while true; do
+                WAIT_TIME=$(( (RANDOM % 600) + 300 ))
+                echo "Waiting for $WAIT_TIME seconds before fetching a random Wikipedia page..."
+                sleep $WAIT_TIME
+                curl -sL https://en.wikipedia.org/wiki/Special:Random -o /data/index.html
+                echo "Updated random Wikipedia page!"
+              done
+          volumeMounts:
+            - name: www-data
+              mountPath: /data
