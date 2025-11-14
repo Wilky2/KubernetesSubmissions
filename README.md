@@ -173,3 +173,4 @@ sum(
 - [5.2.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.2/ServiceMesh/exo_5_2)
 - [5.3.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.3/logoutput)
 - [5.4.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.4/wikipedia-app)
+- [5.6.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.6/serveless)
