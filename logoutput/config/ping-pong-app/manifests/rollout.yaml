@@ -28,7 +28,7 @@ spec:
           image: PINGPONG/IMAGE
           imagePullPolicy: Always
           env:
-            - name: PORT
+            - name: PINGPONG_PORT
               value: "4040"
             - name: DATABASE_URL
               value: "postgres-svc"

@@ -1,6 +1,6 @@
 spring.application.name: ping-pong-app
 
-server.port: ${PORT:4040}
+server.port: ${PINGPONG_PORT:4040}
 
 spring:
   datasource:

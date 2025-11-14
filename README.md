@@ -174,3 +174,4 @@ sum(
 - [5.3.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.3/logoutput)
 - [5.4.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.4/wikipedia-app)
 - [5.6.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.6/serveless)
+- [5.7.](https://github.com/Wilky2/KubernetesSubmissions/tree/5.7/logoutput/config/ping-pong-app-serverless)

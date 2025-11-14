@@ -1,0 +1,25 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: pingpong-svc
+  namespace: exercises
+spec:
+  template:
+    spec:
+      containers:
+      - image: wilky2/pingpong:5.7
+        env:
+          - name: PINGPONG_PORT
+            value: "8080"
+          - name: DATABASE_URL
+            value: "postgres-svc"
+          - name: DATABASE_PORT
+            value: "5432"
+          - name: DATABASE_NAME
+            value: "pong_db"
+          - name: DATABASE_USERNAME
+            value: "postgres"
+          - name: DATABASE_PASSWORD
+            value: "postgres"
+        ports:
+        - containerPort: 8080

@@ -20,6 +20,6 @@ images:
 - name: LOGOUTPUT/IMAGE
   newName: wilky2/logoutput:5.3
 - name: PINGPONG/IMAGE
-  newName: wilky2/pingpong:6a4097027c28eee0676178f897ea691c3ec21b31
+  newName: wilky2/pingpong:5.7
 - name: GREETER/IMAGE
   newName: wilky2/greeter:5.3

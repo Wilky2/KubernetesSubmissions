@@ -58,7 +58,7 @@ docker run ping-pong-app
 ## Environment variable
 FILEPATH :  Absolute path where files (including pingpong data) are stored.
 
-PORT: The port on which the application runs.
+PINGPONG_PORT: The port on which the application runs.
 
 DATABASE_URL: Hostname or IP address of the PostgreSQL server.
 
